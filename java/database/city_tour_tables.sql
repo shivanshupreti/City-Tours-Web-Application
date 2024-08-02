@@ -17,6 +17,7 @@ CREATE TABLE Landmarks (
     description TEXT NOT NULL,
     venue_type VARCHAR(50) NOT NULL,
     approval_status BOOLEAN NOT NULL DEFAULT FALSE,
+	image_url VARCHAR(255),
     CONSTRAINT PK_landmarks PRIMARY KEY (id)
 );
 CREATE TABLE LandmarkAvailability (
@@ -109,6 +110,6 @@ VALUES
 ('Bondi Beach', 'Sydney', 'Popular beach known for surfing.', 'Beach', TRUE),
 ('Taronga Zoo', 'Sydney', 'Large zoo with diverse wildlife.', 'Zoo', TRUE),
 ('Royal Botanic Garden', 'Sydney', 'Beautiful botanical gardens by the harbor.', 'Garden', TRUE),
-('The Rocks', 'Sydney', 'Historic area with markets, museums, and restaurants.', 'Historic District', TRUE);
+('The Rocks', 'Sydney', 'Historic area with markets, museums, and restaurants.', 'Historic District', TRUE, 'https://goway-cms-files.s3.ca-central-1.amazonaws.com/production/wordpress_images/Rocks-District-in-Sydney-Australia.jpg');
 
 COMMIT TRANSACTION;
