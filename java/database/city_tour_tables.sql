@@ -63,53 +63,55 @@ CREATE TABLE ItineraryLandmarks (
 
 
 -- Paris landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url)
 VALUES
-('Eiffel Tower', 'Paris', 'Iconic symbol of France and a must-visit.', 'Monument', TRUE),
-('Louvre Museum', 'Paris', 'Home to the Mona Lisa and countless other masterpieces.', 'Museum', TRUE),
-('Notre-Dame Cathedral', 'Paris', 'Famous Gothic cathedral.', 'Church', TRUE),
-('Champs-Élysées and Arc de Triomphe', 'Paris', 'Prestigious avenue ending with the triumphal arch.', 'Avenue', TRUE),
-('Sacré-Cœur Basilica', 'Paris', 'Stunning basilica on Montmartre hill.', 'Church', TRUE),
-('Palace of Versailles', 'Paris', 'Luxurious former royal residence.', 'Palace', TRUE);
+('Eiffel Tower', 'Paris', 'Iconic symbol of France and a must-visit.', 'Monument', TRUE, NULL),
+('Louvre Museum', 'Paris', 'Home to the Mona Lisa and countless other masterpieces.', 'Museum', TRUE, NULL),
+('Notre-Dame Cathedral', 'Paris', 'Famous Gothic cathedral.', 'Church', TRUE, NULL),
+('Champs-Élysées and Arc de Triomphe', 'Paris', 'Prestigious avenue ending with the triumphal arch.', 'Avenue', TRUE, NULL),
+('Sacré-Cœur Basilica', 'Paris', 'Stunning basilica on Montmartre hill.', 'Church', TRUE, NULL),
+('Palace of Versailles', 'Paris', 'Luxurious former royal residence.', 'Palace', TRUE, NULL);
 
 -- Rome landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url)
 VALUES
-('Colosseum', 'Rome', 'Ancient amphitheater and symbol of Rome.', 'Amphitheater', TRUE),
-('Vatican City (St. Peter''s Basilica & Sistine Chapel)', 'Rome', 'Seat of the Catholic Church and home to Michelangelo''s artwork.', 'Religious Site', TRUE),
-('Pantheon', 'Rome', 'Well-preserved ancient Roman temple.', 'Temple', TRUE),
-('Trevi Fountain', 'Rome', 'Famous Baroque fountain.', 'Fountain', TRUE),
-('Roman Forum', 'Rome', 'Ancient center of Roman public life.', 'Historical Site', TRUE),
-('Piazza Navona', 'Rome', 'Elegant square with beautiful fountains and architecture.', 'Square', TRUE);
+('Colosseum', 'Rome', 'Ancient amphitheater and symbol of Rome.', 'Amphitheater', TRUE, NULL),
+('Vatican City (St. Peter''s Basilica & Sistine Chapel)', 'Rome', 'Seat of the Catholic Church and home to Michelangelo''s artwork.', 'Religious Site', TRUE, NULL),
+('Pantheon', 'Rome', 'Well-preserved ancient Roman temple.', 'Temple', TRUE, NULL),
+('Trevi Fountain', 'Rome', 'Famous Baroque fountain.', 'Fountain', TRUE, NULL),
+('Roman Forum', 'Rome', 'Ancient center of Roman public life.', 'Historical Site', TRUE, NULL),
+('Piazza Navona', 'Rome', 'Elegant square with beautiful fountains and architecture.', 'Square', TRUE, NULL);
 
 -- Kyoto landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url)
 VALUES
-('Fushimi Inari Shrine', 'Kyoto', 'Known for its thousands of red torii gates.', 'Shrine', TRUE),
-('Kinkaku-ji (Golden Pavilion)', 'Kyoto', 'Stunning golden temple.', 'Temple', TRUE),
-('Kiyomizu-dera', 'Kyoto', 'Historic temple with a large wooden stage.', 'Temple', TRUE),
-('Arashiyama Bamboo Grove', 'Kyoto', 'Serene bamboo forest.', 'Forest', TRUE),
-('Nijō Castle', 'Kyoto', 'Historic castle with beautiful gardens.', 'Castle', TRUE),
-('Gion District', 'Kyoto', 'Traditional geisha district with preserved architecture.', 'District', TRUE);
+('Fushimi Inari Shrine', 'Kyoto', 'Known for its thousands of red torii gates.', 'Shrine', TRUE, NULL),
+('Kinkaku-ji (Golden Pavilion)', 'Kyoto', 'Stunning golden temple.', 'Temple', TRUE, NULL),
+('Kiyomizu-dera', 'Kyoto', 'Historic temple with a large wooden stage.', 'Temple', TRUE, NULL),
+('Arashiyama Bamboo Grove', 'Kyoto', 'Serene bamboo forest.', 'Forest', TRUE, NULL),
+('Nijō Castle', 'Kyoto', 'Historic castle with beautiful gardens.', 'Castle', TRUE, NULL),
+('Gion District', 'Kyoto', 'Traditional geisha district with preserved architecture.', 'District', TRUE, NULL);
 
 -- New York City landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url)
 VALUES
-('Statue of Liberty', 'New York City', 'Iconic symbol of freedom and democracy.', 'Monument', TRUE),
-('Central Park', 'New York City', 'Large urban park offering numerous activities.', 'Park', TRUE),
-('Times Square', 'New York City', 'Bustling commercial and entertainment hub.', 'Square', TRUE),
-('Empire State Building', 'New York City', 'Famous skyscraper with observation decks.', 'Skyscraper', TRUE),
-('Brooklyn Bridge', 'New York City', 'Historic suspension bridge.', 'Bridge', TRUE),
-('Metropolitan Museum of Art', 'New York City', 'One of the world''s largest and finest art museums.', 'Museum', TRUE);
+('Statue of Liberty', 'New York City', 'Iconic symbol of freedom and democracy.', 'Monument', TRUE, NULL),
+('Central Park', 'New York City', 'Large urban park offering numerous activities.', 'Park', TRUE, NULL),
+('Times Square', 'New York City', 'Bustling commercial and entertainment hub.', 'Square', TRUE, NULL),
+('Empire State Building', 'New York City', 'Famous skyscraper with observation decks.', 'Skyscraper', TRUE, NULL),
+('Brooklyn Bridge', 'New York City', 'Historic suspension bridge.', 'Bridge', TRUE, NULL),
+('Metropolitan Museum of Art', 'New York City', 'One of the world''s largest and finest art museums.', 'Museum', TRUE, NULL);
 
 -- Sydney landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url)
 VALUES
-('Sydney Opera House', 'Sydney', 'Iconic performing arts center.', 'Theater', TRUE),
-('Sydney Harbour Bridge', 'Sydney', 'Famous bridge with climbing tours.', 'Bridge', TRUE),
-('Bondi Beach', 'Sydney', 'Popular beach known for surfing.', 'Beach', TRUE),
-('Taronga Zoo', 'Sydney', 'Large zoo with diverse wildlife.', 'Zoo', TRUE),
-('Royal Botanic Garden', 'Sydney', 'Beautiful botanical gardens by the harbor.', 'Garden', TRUE),
-('The Rocks', 'Sydney', 'Historic area with markets, museums, and restaurants.', 'Historic District', TRUE, 'https://goway-cms-files.s3.ca-central-1.amazonaws.com/production/wordpress_images/Rocks-District-in-Sydney-Australia.jpg');
+('Sydney Opera House', 'Sydney', 'Iconic performing arts center.', 'Theater', TRUE, NULL),
+('Sydney Harbour Bridge', 'Sydney', 'Famous bridge with climbing tours.', 'Bridge', TRUE, NULL),
+('Bondi Beach', 'Sydney', 'Popular beach known for surfing.', 'Beach', TRUE, NULL),
+('Taronga Zoo', 'Sydney', 'Large zoo with diverse wildlife.', 'Zoo', TRUE, NULL),
+('Royal Botanic Garden', 'Sydney', 'Beautiful botanical gardens by the harbor.', 'Garden', TRUE, NULL),
+('The Rocks', 'Sydney', 'Historic area with markets, museums, and restaurants.', 'Historic District', TRUE, NULL);
 
 COMMIT TRANSACTION;
+
+-- Rollback transaction;
