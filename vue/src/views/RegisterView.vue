@@ -1,25 +1,27 @@
 <template>
   <div id="register" class="text-center">
-    <form v-on:submit.prevent="register">
-      <h1>Create Account</h1>
-      <div role="alert" v-if="registrationErrors">
-        {{ registrationErrorMsg }}
-      </div>
-      <div class="form-input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
-      </div>
-      <div class="form-input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required />
-      </div>
-      <div class="form-input-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
-      </div>
-      <button type="submit">Create Account</button>
-      <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
-    </form>
+    <div class="form-container">
+      <form v-on:submit.prevent="register">
+        <h1>Create Account</h1>
+        <div role="alert" v-if="registrationErrors" class="alert">
+          {{ registrationErrorMsg }}
+        </div>
+        <div class="form-input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" v-model="user.username" required autofocus />
+        </div>
+        <div class="form-input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model="user.password" required />
+        </div>
+        <div class="form-input-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
+        </div>
+        <button type="submit">Create Account</button>
+        <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -73,10 +75,70 @@ export default {
 </script>
 
 <style scoped>
-.form-input-group {
+#register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.form-container {
+  background: #ececec;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(133, 133, 133, 0.1);
+  width: 300px;
+  height: 380px;
+  padding-right: 60px;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.alert {
+  color: red;
   margin-bottom: 1rem;
 }
+
+.form-input-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 label {
-  margin-right: 0.5rem;
+  flex-basis: 30%;
+  text-align: right;
+  margin-right: 1rem;
+}
+
+input {
+  flex-basis: 70%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fcfcfc;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 </style>
