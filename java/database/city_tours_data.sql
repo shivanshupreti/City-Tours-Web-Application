@@ -8,9 +8,9 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 -- Paris landmarks
 INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url)
 VALUES
-('Eiffel Tower', 'Paris', 'Iconic symbol of France and a must-visit.', 'Monument', TRUE, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm-IDtfwTRzQ4ZkKsxN8I68hSY9kgw8aUCxg&s'),
-('Louvre Museum', 'Paris', 'Home to the Mona Lisa and countless other masterpieces.', 'Museum', TRUE, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXSxi0V3JllREqOi5iilezupfXinx2gEqO6Q&s'),
-('Notre-Dame Cathedral', 'Paris', 'Famous Gothic cathedral.', 'Church', TRUE, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSov2yUrlqw2XBlX2_8T-KX-SYmbEYhNsyxaQ&s'),
+('Eiffel Tower', 'Paris', 'Iconic symbol of France and a must-visit.', 'Monument', TRUE, 'https://wallpapercat.com/w/middle-retina/1/a/2/30557-2880x1800-desktop-hd-eiffel-tower-background-photo.jpg'),
+('Louvre Museum', 'Paris', 'Home to the Mona Lisa and countless other masterpieces.', 'Museum', TRUE, 'https://media.architecturaldigest.com/photos/5900cc370638dd3b70018b33/16:9/w_1920,c_limit/Secrets%20of%20Louvre%201.jpg'),
+('Notre-Dame Cathedral', 'Paris', 'Famous Gothic cathedral.', 'Church', TRUE, 'https://c0.wallpaperflare.com/preview/713/515/606/cathedral-notre-dame-paris-morning-light.jpg'),
 ('Arc de Triomphe', 'Paris', 'Prestigious avenue ending with the triumLandphal arch.', 'Avenue', TRUE, 'https://image.jimcdn.com/app/cms/image/transf/dimension=origxorig:format=jpg/path/se80bcf7e1bbfb507/image/i54f4e905929ff6b0/version/1305989812/image.jpg'),
 ('Sacre Coeur Basilica', 'Paris', 'Stunning basilica on Montmartre hill.', 'Church', TRUE, 'https://static.wixstatic.com/media/68b72b_2a44b33c64d141e79bf5990d7ab10f64~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/68b72b_2a44b33c64d141e79bf5990d7ab10f64~mv2.jpg'),
 ('Palace of Versailles', 'Paris', 'Luxurious former royal residence.', 'Palace', TRUE, 'https://www.travelandleisure.com/thmb/sR2kS_tl_yz4bxFkxDWyaVv6lmw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/versailles-palace-courtyard-SECRET1216-911d9538288141a686474b1ce08a2e1a.jpg');

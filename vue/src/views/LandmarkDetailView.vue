@@ -1,10 +1,12 @@
 <template>
+  <div class="container">
     <div class="loading" v-if="isLoading">
       <p>Loading...</p>
     </div>
     <div v-else>
       <landmark-details :landmark="landmark" :availability="availability" />
     </div>
+  </div>
   </template>
   
   <script>
@@ -53,6 +55,12 @@
   </script>
   
   <style scoped>
+.container {
+  background-color:whitesmoke; 
+  min-height: 100vh; 
+  padding: 16px; 
+  border-radius: 15px; 
+  }
   .loading {
     text-align: center;
     font-size: 1.5rem;
