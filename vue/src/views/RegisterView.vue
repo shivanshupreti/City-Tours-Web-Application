@@ -18,6 +18,13 @@
           <label for="confirmPassword">Confirm Password</label>
           <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
         </div>
+        <div class="form-input-group">
+          <label for="role">Role</label>
+          <select id="role" v-model="user.role" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
         <button type="submit">Create Account</button>
         <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
       </form>
@@ -140,5 +147,13 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+select {
+  flex-basis: 70%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fcfcfc;
 }
 </style>

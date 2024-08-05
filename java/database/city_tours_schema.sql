@@ -62,4 +62,4 @@ CREATE TABLE ItineraryLandmarks (
 
 COMMIT TRANSACTION;
 
--- Rollback transaction;
+--Rollback transaction;
