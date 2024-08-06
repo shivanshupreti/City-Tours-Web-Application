@@ -47,7 +47,7 @@ CREATE TABLE Itineraries (
     name VARCHAR(100) NOT NULL,
     starting_point VARCHAR(255) NOT NULL,
     date DATE NOT NULL,
-    shared_url VARCHAR(255),
+    shared_status BOOLEAN NOT NULL DEFAULT FALSE,
     CONSTRAINT PK_itineraries PRIMARY KEY (id),
     CONSTRAINT FK_itineraries_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
