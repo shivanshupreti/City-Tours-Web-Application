@@ -8,6 +8,8 @@ public interface LandmarkDao {
     Landmark getLandmarkById(int id);
     List<Landmark> getAllLandmarks();
     List<Landmark> getLandmarksByCity(String city);
+    List<Landmark> getLandmarksByVenueType(String venueType);
+    List<Landmark> getLandmarksByDayOfWeek(String dayOfWeek);
 }
 
 

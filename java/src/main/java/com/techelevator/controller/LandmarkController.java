@@ -91,6 +91,28 @@ public class LandmarkController {
         }
         return availabilityList;
     }
+
+    @GetMapping("/venue/{venueType}")
+    public List<Landmark> getLandmarksByVenueType(@PathVariable String venueType) {
+        List<Landmark> landmarks = landmarkDao.getLandmarksByVenueType(venueType);
+        if (landmarks.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return landmarks;
+    }
+
+    @GetMapping("/availability/day/{dayOfWeek}")
+    public List<Landmark> getLandmarksByDayOfWeek(@PathVariable String dayOfWeek) {
+        try {
+            List<Landmark> landmarks = landmarkDao.getLandmarksByDayOfWeek(dayOfWeek);
+            if (landmarks.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No landmarks found for the given day of the week");
+            }
+            return landmarks;
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to retrieve landmarks by day of week", e);
+        }
+    }
 }
 
 

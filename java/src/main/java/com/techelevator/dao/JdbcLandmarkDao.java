@@ -66,6 +66,40 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarks;
     }
 
+    @Override
+    public List<Landmark> getLandmarksByVenueType(String venueType) {
+        List<Landmark> landmarks = new ArrayList<>();
+        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url " +
+                "FROM landmarks WHERE venue_type = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, venueType);
+            while (results.next()) {
+                landmarks.add(mapRowToLandmark(results));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return landmarks;
+    }
+
+    @Override
+    public List<Landmark> getLandmarksByDayOfWeek(String dayOfWeek) {
+        List<Landmark> landmarks = new ArrayList<>();
+        String sql = "SELECT l.id, l.name, l.city, l.description, l.venue_type, l.approval_status, l.image_url " +
+                "FROM landmarks l " +
+                "JOIN landmarkavailability la ON l.id = la.landmark_id " +
+                "WHERE la.day_of_week = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, dayOfWeek);
+            while (results.next()) {
+                landmarks.add(mapRowToLandmark(results));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return landmarks;
+    }
+
     private Landmark mapRowToLandmark(SqlRowSet rs) {
         Landmark landmark = new Landmark();
         landmark.setId(rs.getInt("id"));
