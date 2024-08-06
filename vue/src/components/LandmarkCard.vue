@@ -55,56 +55,55 @@ export default {
 
 <style>
 .card {
-    border: 2px solid black;
+    border: 2px solid wheat;
     border-radius: 20px;
-    width: 150px;
-    height: 420px;
-    flex: 1 0 calc(16.66% - 20px);
-    margin: 5px;
+    width: 100%;
+    max-width: 250px; 
+    height: auto;
+    margin: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-}
-
-.card.visited {
-    background-color: lightgray;
-}
-
-.card .landmark-name {
-    font-size: 1.5rem;
-    height: 3rem;
-    font-family: 'Oswald', sans-serif;
-}
-
-.card .landmark-city {
-    font-size: 1rem;
-}
-
-.card .landmark-description {
-    font-size: 0.875rem;
-    color: gray;
-    height: 4rem;
-    margin-bottom: 10px;
-    /* Adjusted spacing */
+    box-sizing: border-box; 
+    background-color:blanchedalmond;
 }
 
 .card img {
     width: 100%;
-    height: 30%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom: 2px solid wheat; 
 }
 
-.button-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    /* Adjusted spacing */
+.landmark-name {
+    font-size: 1.5rem;
+    height: 2rem;
+    padding: 12px 10px; 
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.landmark-city {
+    font-size: 1rem;
+    padding: 0 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.landmark-description {
+    font-size: 0.875rem;
+    color: gray;
+    margin: 0 10px 10px;
+}
+
+.button-details {
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .checkbox-label {
     display: flex;
     align-items: center;
+    justify-content: center; 
 }
 
 .checkbox-label input {
@@ -115,8 +114,22 @@ export default {
     margin-left: 5px;
 }
 
-.button-details {
-    margin-bottom: 20px;
-    /* Adjusted spacing */
+
+@media (min-width: 600px) {
+    .card {
+        width: 45%; 
+    }
+}
+
+@media (min-width: 900px) {
+    .card {
+        width: 30%; 
+    }
+}
+
+@media (min-width: 1200px) {
+    .card {
+        width: 22%; 
+    }
 }
 </style>
