@@ -62,4 +62,12 @@ public class ItineraryController {
         Integer userId = userDao.getUserByUsername(principal.getName()).getId();
         return itineraryDao.deleteItineraryById(id,userId);
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @RequestMapping(path = "/update/{id}", method = RequestMethod.PUT)
+    public Itinerary updateItinerary (@RequestBody Itinerary updatedItinerary, @PathVariable Integer id, Principal principal){
+        Integer userId = userDao.getUserByUsername(principal.getName()).getId();
+
+        return itineraryDao.updateItinerary(updatedItinerary, userId, id);
+    }
 }

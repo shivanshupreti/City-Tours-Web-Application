@@ -24,7 +24,7 @@ public class Itinerary {
         this.landmarkList = landmarkList;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

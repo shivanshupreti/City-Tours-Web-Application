@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Itinerary;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,6 +61,27 @@ public class JdbcItineraryDao implements ItineraryDao{
             newItinerary = getItineraryById(newId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new  DaoException("unable to connect to the server or database", e);
+        }
+        return newItinerary;
+    }
+    @Override
+    public Itinerary updateItinerary(Itinerary itinerary, Integer userID, Integer id) {
+        Itinerary newItinerary = null;
+        String sql = "UPDATE itineraries SET name = ?, starting_point = ?, date = ?, shared_status = ? WHERE id = ? AND user_id = ?;";
+
+        try {
+            int numberOfRows = jdbcTemplate.update(sql, itinerary.getName(), itinerary.getStartingPoint(), itinerary.getDate(), itinerary.isShared(),
+                    id, userID);
+
+            if(numberOfRows == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+            } else {
+                newItinerary = getItineraryById(itinerary.getId());
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
         }
         return newItinerary;
     }
