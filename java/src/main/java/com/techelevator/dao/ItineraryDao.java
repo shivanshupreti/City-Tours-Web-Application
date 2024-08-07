@@ -7,7 +7,7 @@ public interface ItineraryDao {
 
     Itinerary getItineraryById(Integer id);
 
-    List<Itinerary> getAllItineraries(Integer userId);
+    List<Itinerary> getAllItinerariesById(Integer userId);
     Itinerary createItinerary(Itinerary itinerary, Integer userId);
 
     Itinerary updateItinerary(Itinerary itinerary, Integer userid, Integer id);

@@ -34,7 +34,7 @@ public class JdbcItineraryDao implements ItineraryDao{
         return itinerary;
     }
     @Override
-    public List <Itinerary>  getAllItineraries(Integer userId){
+    public List <Itinerary>  getAllItinerariesById(Integer userId){
         List<Itinerary> itineraryList = new ArrayList<>();
         String sql = "SELECT id, user_id, name, starting_point, date, shared_status FROM itineraries WHERE user_id = ?";
         try{

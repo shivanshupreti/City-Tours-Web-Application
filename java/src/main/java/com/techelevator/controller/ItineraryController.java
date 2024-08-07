@@ -44,12 +44,12 @@ public class ItineraryController {
         return itineraryDao.createItinerary(itinerary, userId);
     }
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-    @RequestMapping(path = "/yourItineraries", method = RequestMethod.GET)
-    public List<Itinerary> getAllItineraries(Principal principal){
+    @RequestMapping(path = "/yourItineraries/{id}", method = RequestMethod.GET)
+    public List<Itinerary> getAllItinerariesById(Principal principal){
         List<Itinerary> itineraries;
         Integer userId = userDao.getUserByUsername(principal.getName()).getId();
         try {
-            itineraries = itineraryDao.getAllItineraries(userId);
+            itineraries = itineraryDao.getAllItinerariesById(userId);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
