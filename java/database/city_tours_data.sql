@@ -355,4 +355,35 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (30, 'Saturday', '10:00:00', '17:00:00'),
 (30, 'Sunday', '10:00:00', '17:00:00');
 
+-- Itineraries
+INSERT INTO Itineraries (user_id, name, starting_point, date, shared_status) VALUES
+(1, 'Paris Highlights', 'Hotel Le Meurice', '2024-08-15', TRUE),
+(1, 'Rome Adventure', 'Rome Central Station', '2024-09-01', FALSE),
+(2, 'Kyoto Cultural Tour', 'Kyoto Station', '2024-10-10', TRUE);
+
+-- ItineraryLandmarks
+INSERT INTO ItineraryLandmarks (itinerary_id, landmark_id, order_num) VALUES
+-- Paris Highlights
+(1, 1, 1),
+(1, 2, 2),
+(1, 3, 3),
+(1, 4, 4),
+(1, 5, 5),
+
+-- Rome Adventure
+(2, 7, 1),
+(2, 8, 2),
+(2, 9, 3),
+(2, 10, 4),
+(2, 11, 5),
+(2, 12, 6),
+
+-- Kyoto Cultural Tour
+(3, 13, 1),
+(3, 14, 2),
+(3, 15, 3),
+(3, 16, 4),
+(3, 17, 5),
+(3, 18, 6);
+
 COMMIT TRANSACTION;
