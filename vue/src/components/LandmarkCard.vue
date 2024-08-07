@@ -4,18 +4,11 @@
         <img v-if="landmark.imageUrl" :src="landmark.imageUrl" />
         <h3 class="landmark-city">{{ landmark.city }}</h3>
         <p class="landmark-description">{{ landmark.name }}: {{ landmark.description }}</p>
-        <div class="button-container" v-if="!enableAdd">
-            <label class="checkbox-label">
-                <input type="checkbox" :checked="landmark.visited" @change="handleCheckboxChange" />
-                <span>{{ landmark.visited ? 'Saved' : 'Save To Itinerary' }}</span>
-            </label>
-        </div>
         <div class="button-details">
             <router-link :to="{ name: 'LandmarkDetailView', params: { id: landmark.id } }">
                 <button class="details">View More</button>
             </router-link>
         </div>
-        <button v-if="enableAdd" v-on:click.prevent="addToItineraryList(landmark)">Save To Itinerary</button>
     </div>
 </template>
 
@@ -28,28 +21,6 @@ export default {
             default: false
         }
     },
-    methods: {
-        handleCheckboxChange(event) {
-            const isChecked = event.target.checked;
-            this.setVisited(isChecked);
-            if (isChecked) {
-                this.addToItineraryList(this.landmark);
-            } else {
-                this.removeFromItineraryList(this.landmark);
-            }
-        },
-        setVisited(value) {
-            this.$store.commit('SET_VISITED_STATUS', { landmark: this.landmark, value });
-        },
-        addToItineraryList(landmark) {
-            let addedLandmark = { ...landmark, visited: true };
-            this.$store.commit('SAVE_LANDMARK', addedLandmark);
-        },
-        removeFromItineraryList(landmark) {
-            let removedLandmark = { ...landmark, visited: false };
-            this.$store.commit('REMOVE_LANDMARK', removedLandmark);
-        }
-    }
 };
 </script>
 

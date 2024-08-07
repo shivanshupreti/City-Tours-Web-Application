@@ -15,5 +15,17 @@ export default {
 
   getAvailability(id) {
     return http.get(`/landmarks/availability/${id}`);
+  },
+
+  listByCity(city) {
+    return http.get(`/landmarks/city/${city}`);
+  },
+
+  listByVenueType(venueType) {
+    return http.get(`/landmarks/venue/${venueType}`);
+  },
+
+  listByDayOfWeek(dayOfWeek) {
+    return http.get(`/landmarks/availability/day/${dayOfWeek}`);
   }
 }

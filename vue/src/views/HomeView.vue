@@ -3,9 +3,14 @@
       <p>Loading...</p>
   </div>
   <div v-else>
-      <header class="flex">
+      <header class="header">
         <img src="images\city_tour.gif" alt="City Tours Icon" class="header-icon" />
           <h1>City Tours</h1>
+          <SearchableDropdown
+          v-model="searchCriteria"
+          @search="performSearch"  
+          class="dropdown"
+        />
       </header>
       <main class="main-content">
           <div v-for="city in cities" :key="city.name" class="landmark-list-wrapper">
@@ -16,12 +21,14 @@
 </template>
 
 <script>
-import LandmarkService from '../services/LandmarkService.js';
+import FilteringService from '../services/FilteringService.js';
 import LandmarkList from '../components/LandmarkList.vue';
+import SearchableDropdown from '../components/SearchableDropdown.vue';
 
 export default {
   components: {
-      LandmarkList
+      LandmarkList,
+      SearchableDropdown
   },
   data() {
       return {
@@ -32,65 +39,72 @@ export default {
               { name: 'New York City' },
               { name: 'Sydney' }
           ],
-          isLoading: true
+          isLoading: true,
+          searchCriteria: ''
       };
   },
   methods: {
-      async fetchLandmarks(city) {
-          try {
-              const response = await LandmarkService.list(city);
-              this.$set(this.landmarks, city, response.data);
-          } catch (error) {
-              this.handleErrorResponse();
-          } finally {
-              this.isLoading = false;
-          }
-      },
-      handleErrorResponse() {
-          this.isLoading = false;
-          this.$store.commit('SET_NOTIFICATION', `Could not get landmark data from server.`);
+    async fetchLandmarks(criteria = '') {
+      this.isLoading = true;
+      try {
+        const landmarks = await FilteringService.filterLandmarks(criteria);
+        this.cities = landmarks;
+      } catch (error) {
+        this.handleErrorResponse();
+      } finally {
+        this.isLoading = false;
       }
+    },
+    async performSearch() {
+      await this.fetchLandmarks(this.searchCriteria);
+    },
+    handleErrorResponse() {
+      this.isLoading = false;
+      this.$store.commit('SET_NOTIFICATION', `Could not get landmark data from server.`);
+    }
   },
   created() {
-      this.cities.forEach(city => this.fetchLandmarks(city.name));
+    this.fetchLandmarks(); 
   }
-}
+};
 </script>
 
 <style scoped>
-.flex {
+.header {
   display: flex;
-  align-items: center;  
-  justify-content: center;  
-  margin-top: 20px;
-  font-family:'Courier New', Courier, monospace;
-  height: 20vh;  
-  position: relative;  
-  margin-left: -120px;  
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
 }
 
 .header-icon {
-  width: 140px; 
+  width: 140px;
   height: auto;
-  margin-right: 0px; 
 }
 
 h1 {
-  margin: 0; 
+  margin: 0;
+  font-size: 2em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dropdown {
+  margin-left: 20px;
 }
 
 .main-content {
-  background-color:white; 
-  padding: 16px; 
+  background-color: white;
+  padding: 16px;
 }
 
 .landmark-list-wrapper {
-  background-color:whitesmoke; 
+  background-color: whitesmoke;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 16px;
-  font-size: 1em; 
-  box-shadow: 0 0 10px rgba(133, 133, 133, 0.1); 
+  font-size: 1em;
+  box-shadow: 0 0 10px rgba(133, 133, 133, 0.1);
 }
 
 main {
