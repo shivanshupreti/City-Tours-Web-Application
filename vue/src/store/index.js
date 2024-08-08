@@ -1,8 +1,8 @@
 import { createStore as _createStore } from 'vuex';
-import axios from 'axios';
+ import axios from 'axios';
 
 export function createStore(currentToken, currentUser) {
-  let store = _createStore({
+   let store = _createStore({
     state: {
       token: currentToken || '',
       user: currentUser || {}
@@ -28,3 +28,4 @@ export function createStore(currentToken, currentUser) {
   });
   return store;
 }
+

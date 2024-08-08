@@ -4,7 +4,8 @@
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
       <router-link v-bind:to="{ name: 'login' }" v-else>Login</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'register' }">Register</router-link>
+      <router-link v-bind:to="{ name: 'register' }">Register</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'createItinerary' }" v-if="$store.state.token != ''">Create Itinerary</router-link>
     </div>
     <router-view />
     <footer id="footer">
