@@ -6,7 +6,7 @@
       <header class="header">
         <img src="images\city_tour.gif" alt="City Tours Icon" class="header-icon" />
           <h1>City Tours</h1>
-          <SearchableDropdown
+          <SearchBox
           v-model="searchCriteria"
           @search="performSearch"  
           class="dropdown"
@@ -23,12 +23,13 @@
 <script>
 import FilteringService from '../services/FilteringService.js';
 import LandmarkList from '../components/LandmarkList.vue';
-import SearchableDropdown from '../components/SearchableDropdown.vue';
+import SearchBox from '../components/SearchBox.vue';
+
 
 export default {
   components: {
       LandmarkList,
-      SearchableDropdown
+      SearchBox
   },
   data() {
       return {
