@@ -27,5 +27,9 @@ export default {
 
   listByDayOfWeek(dayOfWeek) {
     return http.get(`/landmarks/availability/day/${dayOfWeek}`);
+  },
+  
+  getAllLandmarks() {
+    return http.get('/landmarks');
   }
 }
