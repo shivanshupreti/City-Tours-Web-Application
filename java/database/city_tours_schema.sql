@@ -18,6 +18,7 @@ CREATE TABLE Landmarks (
     venue_type VARCHAR(50) NOT NULL,
     approval_status BOOLEAN NOT NULL DEFAULT FALSE,
 	image_url VARCHAR(750),
+	order_num int NOT NULL,
     CONSTRAINT PK_landmarks PRIMARY KEY (id)
 );
 CREATE TABLE LandmarkAvailability (
@@ -63,3 +64,7 @@ CREATE TABLE ItineraryLandmarks (
 COMMIT TRANSACTION;
 
 --Rollback transaction;
+
+
+
+

@@ -71,22 +71,30 @@ public class JdbcItineraryDao implements ItineraryDao{
         return itineraryList;
     }
     @Override
-    public Itinerary createItinerary(Itinerary itinerary, Integer userId){
+    public Itinerary createItinerary(Itinerary itinerary, Integer userId) {
         Itinerary newItinerary;
         String sql = "INSERT INTO itineraries(user_id, name, starting_point, date, shared_status) VALUES (?, ?, ?, ?, ?) RETURNING id";
         try {
             Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, userId, itinerary.getName(), itinerary.getStartingPoint(), itinerary.getDate(), itinerary.isShared());
-            if(newId != null) {
+            if (newId != null) {
                 itinerary.setId(newId);
-            }else {
+                List<Landmark> landmarkList = itinerary.getLandmarkList();
+                if (landmarkList != null) {
+                    for (Landmark landmark : landmarkList) {
+                        addLandmarkToItinerary(newId, landmark.getId(), landmark.getOrderNum());
+                    }
+                }
+
+                newItinerary = getItineraryById(newId);
+            } else {
                 throw new DaoException("Failed to retrieve Id");
             }
-            newItinerary = getItineraryById(newId);
         } catch (CannotGetJdbcConnectionException e) {
-            throw new  DaoException("unable to connect to the server or database", e);
+            throw new DaoException("Unable to connect to the server or database", e);
         }
         return newItinerary;
     }
+
     @Override
     public Itinerary updateItinerary(Itinerary itinerary, Integer userID, Integer id) {
         Itinerary newItinerary = null;

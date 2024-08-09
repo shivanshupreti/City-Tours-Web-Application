@@ -22,7 +22,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
     @Override
     public Landmark getLandmarkById(int id) {
         Landmark landmark = null;
-        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url FROM landmarks WHERE id = ?;";
+        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url, order_num FROM landmarks WHERE id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if (results.next()) {
@@ -34,11 +34,11 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmark;
     }
 
+
     @Override
     public List<Landmark> getAllLandmarks() {
         List<Landmark> landmarks = new ArrayList<>();
-        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url " +
-                "FROM landmarks;";
+        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url, order_num FROM landmarks;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
@@ -50,11 +50,11 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarks;
     }
 
+
     @Override
     public List<Landmark> getLandmarksByCity(String city) {
         List<Landmark> landmarks = new ArrayList<>();
-        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url " +
-                "FROM landmarks WHERE city = ?;";
+        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url, order_num FROM landmarks WHERE city = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, city);
             while (results.next()) {
@@ -66,11 +66,11 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarks;
     }
 
+
     @Override
     public List<Landmark> getLandmarksByVenueType(String venueType) {
         List<Landmark> landmarks = new ArrayList<>();
-        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url " +
-                "FROM landmarks WHERE venue_type = ?;";
+        String sql = "SELECT id, name, city, description, venue_type, approval_status, image_url, order_num FROM landmarks WHERE venue_type = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, venueType);
             while (results.next()) {
@@ -82,10 +82,11 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarks;
     }
 
+
     @Override
     public List<Landmark> getLandmarksByDayOfWeek(String dayOfWeek) {
         List<Landmark> landmarks = new ArrayList<>();
-        String sql = "SELECT l.id, l.name, l.city, l.description, l.venue_type, l.approval_status, l.image_url " +
+        String sql = "SELECT l.id, l.name, l.city, l.description, l.venue_type, l.approval_status, l.image_url, l.order_num " +
                 "FROM landmarks l " +
                 "JOIN landmarkavailability la ON l.id = la.landmark_id " +
                 "WHERE la.day_of_week = ?;";
@@ -100,6 +101,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
         return landmarks;
     }
 
+
     private Landmark mapRowToLandmark(SqlRowSet rs) {
         Landmark landmark = new Landmark();
         landmark.setId(rs.getInt("id"));
@@ -109,7 +111,7 @@ public class JdbcLandmarkDao implements LandmarkDao {
         landmark.setVenueType(rs.getString("venue_type"));
         landmark.setApprovalStatus(rs.getBoolean("approval_status"));
         landmark.setImageUrl(rs.getString("image_url"));
+        landmark.setOrderNum(rs.getInt("order_num"));
         return landmark;
     }
 }
-

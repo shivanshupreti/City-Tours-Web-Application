@@ -10,10 +10,11 @@ public class Landmark {
     private String venueType;
     private boolean approvalStatus;
     private String imageUrl;
+    private int orderNum;
 
     public Landmark() { }
 
-    public Landmark(int id, String name, String city, String description, String venueType, boolean approvalStatus, String imageUrl) {
+    public Landmark(int id, String name, String city, String description, String venueType, boolean approvalStatus, String imageUrl, int orderNum) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -21,6 +22,7 @@ public class Landmark {
         this.venueType = venueType;
         this.approvalStatus = approvalStatus;
         this.imageUrl = imageUrl;
+        this.orderNum = orderNum;
     }
 
     public int getId() {
@@ -79,6 +81,14 @@ public class Landmark {
         this.imageUrl = imageUrl;
     }
 
+    public int getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(int orderNum) {
+        this.orderNum = orderNum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,6 +96,7 @@ public class Landmark {
         Landmark landmark = (Landmark) o;
         return id == landmark.id &&
                 approvalStatus == landmark.approvalStatus &&
+                orderNum == landmark.orderNum && // Include orderNum in equals check
                 Objects.equals(name, landmark.name) &&
                 Objects.equals(city, landmark.city) &&
                 Objects.equals(description, landmark.description) &&
@@ -95,7 +106,7 @@ public class Landmark {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, city, description, venueType, approvalStatus, imageUrl);
+        return Objects.hash(id, name, city, description, venueType, approvalStatus, imageUrl, orderNum); // Include orderNum in hashCode
     }
 
     @Override
@@ -108,7 +119,7 @@ public class Landmark {
                 ", venueType='" + venueType + '\'' +
                 ", approvalStatus=" + approvalStatus +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", orderNum=" + orderNum +
                 '}';
     }
 }
-

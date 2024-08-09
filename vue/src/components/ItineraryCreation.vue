@@ -22,7 +22,31 @@
                 </select>
             </div>
             <div class="form-group">
-                <button type="submit">Create Itinerary</button>
+                <label for="city">City:</label>
+                <select id="city" v-model="itinerary.city" @change="fetchLandmarks" required>
+                    <option value="Paris">Paris</option>
+                    <option value="Rome">Rome</option>
+                    <option value="Kyoto">Kyoto</option>
+                    <option value="New York City">New York City</option>
+                    <option value="Sydney">Sydney</option>
+                </select>
+            </div>
+            <div class="form-group" v-if="availableLandmarks.length > 0">
+                <h3>{{ itinerary.city }}</h3>
+                <div class="landmark-list">
+                    <SmallLandmarkCard
+                        v-for="landmark in availableLandmarks"
+                        :key="landmark.id"
+                        :landmark="landmark"
+                        @update-landmark-status="toggleLandmark"
+                    />
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group button-group">
+                <button class="create-btn" type="submit" @click="handleCreate">Save</button>
+                <button class="delete-btn" type="button" @click="handleDelete">Delete</button>
+                <button class="cancel-btn" type="button" @click="handleCancel">Cancel</button>
             </div>
         </form>
     </div>
@@ -30,30 +54,64 @@
 
 <script>
 import ItineraryService from '../services/ItineraryService';
+import LandmarkService from '../services/LandmarkService';
+import SmallLandmarkCard from '../components/SmallLandmarkCard.vue';
 
 export default {
-    data() {
-        return {
-            itinerary: {
-                userId: this.$store.state.user.id,
-                name: '',
-                startingPoint: '',
-                date: '',
-                shared: 'false'
-            }
-        };
+  components: {
+    SmallLandmarkCard
+  },
+  data() {
+    return {
+      itinerary: {
+        userId: this.$store.state.user.id,
+        name: '',
+        startingPoint: '',
+        date: '',
+        shared: false,
+        city: 'Paris',
+        landmarkList: []
+      },
+      availableLandmarks: []
+    };
+  },
+  methods: {
+    async fetchLandmarks() {
+      try {
+        const response = await LandmarkService.listByCity(this.itinerary.city);
+        this.availableLandmarks = response.data;
+      } catch (error) {
+        console.error('Error fetching landmarks:', error);
+        alert('There was an error fetching the landmarks. Please try again.');
+      }
     },
-    methods: {
-        async handleSubmit() {
-            try {
-                await ItineraryService.createItinerary(this.itinerary);
-                this.$router.push({ name: 'home' });
-            } catch (error) {
-                console.error('Error creating itinerary:', error);
-                alert('There was an error creating the itinerary. Please try again.');
-            }
+    async handleCreate() {
+      try {
+        this.itinerary.shared = this.itinerary.shared === 'true';
+        await ItineraryService.createItinerary(this.itinerary);
+        window.scrollTo(0, 0);
+        this.$router.push({ name: 'home' });
+      } catch (error) {
+        console.error('Error creating itinerary:', error);
+        alert('There was an error creating the itinerary. Please try again.');
+      }
+    },
+    toggleLandmark({ landmark, isAdded }) {
+      const index = this.itinerary.landmarkList.findIndex(l => l.id === landmark.id);
+      if (isAdded) {
+        if (index === -1) {
+          this.itinerary.landmarkList.push(landmark);
         }
+      } else {
+        if (index !== -1) {
+          this.itinerary.landmarkList.splice(index, 1);
+        }
+      }
     }
+  },
+  created() {
+    this.fetchLandmarks();
+  }
 };
 </script>
 
@@ -61,9 +119,11 @@ export default {
 .container {
     max-width: 600px;
     margin: 50px auto;
-    background: #fff;
+    background: #ececec;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 h2 {
@@ -86,16 +146,49 @@ h2 {
     box-sizing: border-box;
 }
 
-.form-group button {
-    background-color: #4CAF50;
+.landmark-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.button-group button {
     color: white;
     border: none;
     cursor: pointer;
-    padding: 10px;
-    width: 100%;
+    padding: 12px;
+    width: calc(33% - 10px);
+    font-size: 1rem; 
+    border-radius: 5px; 
 }
 
-.form-group button:hover {
-    background-color: #45a049;
+.button-group .create-btn {
+    background-color: #4CAF50;
+}
+
+.button-group .edit-btn:hover {
+    background-color: #1976D2;
+}
+
+.button-group .delete-btn {
+    background-color: #f44336;
+}
+
+.button-group .delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+.button-group .cancel-btn {
+    background-color: #2196F3;
+}
+
+.button-group .cancel-btn:hover {
+    background-color: #1976D2;
 }
 </style>

@@ -54,7 +54,6 @@ public class ItineraryController {
     @ResponseStatus(HttpStatus.CREATED)
     public Itinerary createItinerary (@RequestBody Itinerary itinerary, Principal principal){
         Integer userId = userDao.getUserByUsername(principal.getName()).getId();
-
         return itineraryDao.createItinerary(itinerary, userId);
     }
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
