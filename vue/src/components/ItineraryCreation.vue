@@ -90,7 +90,7 @@ export default {
         this.itinerary.shared = this.itinerary.shared === 'true';
         await ItineraryService.createItinerary(this.itinerary);
         window.scrollTo(0, 0);
-        this.$router.push({ name: 'home' });
+        this.$router.push({ path: '/itineraries/yourItineraries' });
       } catch (error) {
         console.error('Error creating itinerary:', error);
         alert('There was an error creating the itinerary. Please try again.');

@@ -57,7 +57,7 @@ public class ItineraryController {
         return itineraryDao.createItinerary(itinerary, userId);
     }
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-    @RequestMapping(path = "/yourItineraries/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/yourItineraries", method = RequestMethod.GET)
     public List<Itinerary> getAllItinerariesById(Principal principal){
         List<Itinerary> itineraries;
         Integer userId = userDao.getUserByUsername(principal.getName()).getId();
