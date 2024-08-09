@@ -6,10 +6,7 @@
       <header class="header">
         <img src="images\city_tour.gif" alt="City Tours Icon" class="header-icon" />
           <h1>City Tours</h1>
-          <SearchBox
-          v-model="searchCriteria"
-          @search="performSearch"  
-          class="dropdown"
+          <SearchBox v-model="searchCriteria" @search="performSearch" class="SearchBox"
         />
       </header>
       <main class="main-content">
@@ -21,7 +18,7 @@
 </template>
 
 <script>
-import FilteringService from '../services/FilteringService.js';
+import LandmarkService from '../services/LandmarkService';
 import LandmarkList from '../components/LandmarkList.vue';
 import SearchBox from '../components/SearchBox.vue';
 
@@ -41,32 +38,32 @@ export default {
               { name: 'Sydney' }
           ],
           isLoading: true,
+          landmarks: {},
           searchCriteria: ''
       };
   },
   methods: {
-    async fetchLandmarks(criteria = '') {
-      this.isLoading = true;
+    async fetchLandmarks(city) {
       try {
-        const landmarks = await FilteringService.filterLandmarks(criteria);
-        this.cities = landmarks;
+        const response = await LandmarkService.list(city);
+        this.$set(this.landmarks, city, response.data);
       } catch (error) {
         this.handleErrorResponse();
       } finally {
         this.isLoading = false;
       }
     },
-    async performSearch() {
-      await this.fetchLandmarks(this.searchCriteria);
-    },
     handleErrorResponse() {
       this.isLoading = false;
       this.$store.commit('SET_NOTIFICATION', `Could not get landmark data from server.`);
+    },
+    performSearch(searchCriteria) {
+      console.log('Search for:', searchCriteria);
     }
-  },
-  created() {
-    this.fetchLandmarks(); 
-  }
+    },
+    created() {
+      this.cities.forEach(city => this.fetchLandmarks(city.name));
+    }
 };
 </script>
 
