@@ -49,7 +49,8 @@
       }
     },
     created() {
-      this.getLandmark(this.$route.params.id);
+      const id = this.$route.params.id;
+      this.getLandmark(id);
     }
   };
   </script>

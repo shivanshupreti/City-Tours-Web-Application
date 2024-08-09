@@ -4,8 +4,12 @@
   </div>
   <div v-else>
       <header class="header">
+        <div class="header-content">
         <img src="images\city_tour.gif" alt="City Tours Icon" class="header-icon" />
+        <div class="header-text">
           <h1>City Tours</h1>
+        </div>
+      </div>
           <SearchBox v-model="searchCriteria" @search="performSearch" class="SearchBox"
         />
       </header>
@@ -70,15 +74,25 @@ export default {
 <style scoped>
 .header {
   display: flex;
+  flex-direction: column; 
   align-items: center;
-  gap: 20px;
   padding: 20px;
-  justify-content: center;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 5px; 
 }
 
 .header-icon {
   width: 140px;
   height: auto;
+}
+
+.header-text {
+  text-align: center; 
 }
 
 h1 {
@@ -87,8 +101,11 @@ h1 {
   font-family: 'Courier New', Courier, monospace;
 }
 
-.dropdown {
-  margin-left: 20px;
+.SearchBox {
+  margin-top: 30px; 
+  width: 100%; 
+  max-width: 600px; 
+  min-width: 300px; 
 }
 
 .main-content {

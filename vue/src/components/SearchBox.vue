@@ -4,53 +4,46 @@
       ref="searchInput"
       type="text" 
       v-model="searchText" 
-      placeholder="Search landmarks..." 
+      placeholder="Places to go, things to do, search landmarks..." 
       @input="onSearchInput" 
     />
     
-    <table id="tblUsers" v-if="searchText">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Venue Type</th>
-          <th>City</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-if="isLoading">
-          <td colspan="4">Loading...</td>
-        </tr>
-        <tr v-if="!isLoading && filteredList.length === 0">
-          <td colspan="4">No results found.</td>
-        </tr>
-        <tr v-for="(landmark, index) in filteredList" :key="index">
-          <td>{{ landmark.name }}</td>
-          <td>{{ landmark.venueType }}</td>
-          <td>{{ landmark.city }}</td>
-          <td>{{ landmark.description }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-if="searchText" class="search-results">
+      <div v-if="isLoading">
+        <p>Loading...</p>
+      </div>
+      <div v-if="!isLoading && filteredList.length === 0">
+        <p>No results found.</p>
+      </div>
+      <div 
+        v-for="(landmark, index) in filteredList" 
+        :key="index" 
+        @click="navigateToDetail(landmark)" 
+        class="search-result-item"
+      >
+        <span class="landmark-name">{{ landmark.name }}</span>
+        <span class="landmark-city">{{ landmark.city }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import LandmarkService from '../services/LandmarkService'; 
+import LandmarkService from '../services/LandmarkService';
 
 export default {
   data() {
     return {
-      landmarks: [], 
-      searchText: '', 
-      isLoading: false 
+      landmarks: [],
+      searchText: '',
+      isLoading: false
     };
   },
   computed: {
     filteredList() {
       const lowerCaseSearchText = this.searchText.toLowerCase();
-      
-      return this.landmarks.filter(landmark => 
+
+      return this.landmarks.filter(landmark =>
         (landmark.name && landmark.name.toLowerCase().includes(lowerCaseSearchText)) ||
         (landmark.venueType && landmark.venueType.toLowerCase().includes(lowerCaseSearchText)) ||
         (landmark.city && landmark.city.toLowerCase().includes(lowerCaseSearchText)) ||
@@ -63,8 +56,8 @@ export default {
       this.isLoading = true;
       try {
         const response = await LandmarkService.getAllLandmarks();
-        console.log('API Response:', response.data); 
-        this.landmarks = response.data; 
+        console.log('API Response:', response.data);
+        this.landmarks = response.data;
         if (query) {
           this.searchText = query;
         }
@@ -78,8 +71,11 @@ export default {
       if (this.searchText.trim()) {
         this.fetchLandmarks(this.searchText);
       } else {
-        this.landmarks = []; 
+        this.landmarks = [];
       }
+    },
+    navigateToDetail(landmark) {
+      this.$router.push({ name: 'LandmarkDetailView', params: { id: landmark.id } });
     },
     handleClickOutside(event) {
       const searchInput = this.$refs.searchInput;
@@ -99,24 +95,39 @@ export default {
 </script>
 
 <style scoped>
-#tblUsers {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#tblUsers th, #tblUsers td {
-  padding: 8px;
-  border: 1px solid #ddd;
-}
-
-#tblUsers tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
 input[type="text"] {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
+}
+
+.search-results {
+  margin-top: 10px;
+}
+
+.search-result-item {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
+}
+
+.search-result-item:hover {
+  background-color: #e0e0e0; 
+}
+
+.search-result-item:last-child {
+  border-bottom: none; 
+}
+
+.landmark-name {
+  font-weight: bold;
+  color: #333; 
+}
+
+.landmark-city {
+  color: #777; 
+  margin-left: 10px; 
 }
 </style>

@@ -53,6 +53,7 @@ const routes = [
   { path: '/landmarks/:id', 
     name: 'LandmarkDetailView', 
     component: LandmarkDetailView,
+    props: true,
     meta: {
       requiresAuth: false
     }
