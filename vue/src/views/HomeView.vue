@@ -111,6 +111,7 @@ h1 {
 .main-content {
   background-color: white;
   padding: 16px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 .landmark-list-wrapper {

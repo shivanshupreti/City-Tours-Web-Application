@@ -37,12 +37,19 @@ export default {
     align-items: center;
     text-align: center;
     box-sizing: border-box; 
-    background-color:blanchedalmond;
+    background-color: blanchedalmond;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-color: wheat;
 }
 
 .card img {
     width: 100%;
-    height: 100%;
+    height: 150px; /* Adjust the height as needed */
     object-fit: cover;
     border-bottom: 2px solid wheat; 
 }
