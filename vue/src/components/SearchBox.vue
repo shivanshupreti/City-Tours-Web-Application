@@ -96,10 +96,26 @@ export default {
 
 <style scoped>
 input[type="text"] {
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 12px;
   width: 100%;
+  border-color: wheat;
+  outline: none; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transition: box-shadow 0.3s ease, border-color 0.3s ease; 
+}
+
+input[type="text"]:hover { 
+  background-color: #f9f9f9; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+}
+
+input[type="text"]:focus {
+  border-color: #007BFF; 
+  background-color: #fff; 
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); 
+  outline: none; 
 }
 
 .search-results {
