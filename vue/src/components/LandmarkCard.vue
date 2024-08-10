@@ -1,4 +1,7 @@
 <template>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
     <div class="card" :class="{ visited: landmark.visited }">
         <h2 class="landmark-name">{{ landmark.name }}</h2>
         <img v-if="landmark.imageUrl" :src="landmark.imageUrl" />
@@ -9,10 +12,21 @@
                 <button class="details">View More</button>
             </router-link>
         </div>
+        <div class="popularity-background">
+            <div class="popularity">
+                <i :class="thumbsUpIconClass" @click="toggleThumbsUp"></i>
+                <span>{{ thumbsUpCount }}</span>
+                <span>|</span>
+                <i :class="[thumbsDownIconClass, 'thumbs-down']" @click="toggleThumbsDown"></i>
+                <span>{{ thumbsDownCount }}</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import PopularityService from '@/services/PopularityService';
+
 export default {
     props: {
         landmark: Object,
@@ -21,6 +35,93 @@ export default {
             default: false
         }
     },
+    data() {
+        return {
+            isThumbsUp: false,
+            isThumbsDown: false,
+            thumbsUpCount: 0,
+            thumbsDownCount: 0
+        };
+    },
+    computed: {
+        thumbsUpIconClass() {
+            return this.isThumbsUp ? 'fa-solid fa-thumbs-up active-up' : 'fa-regular fa-thumbs-up';
+        },
+        thumbsDownIconClass() {
+            return this.isThumbsDown ? 'fa-solid fa-thumbs-down active-down' : 'fa-regular fa-thumbs-down';
+        }
+    },
+    async created() {
+        await this.fetchPopularityCounts();
+    },
+    methods: {
+    async fetchPopularityCounts() {
+        try {
+            const response = await PopularityService.getPopularityByLandmarkId(this.landmark.id);
+            const popularityList = response.data;
+
+            this.thumbsUpCount = popularityList.filter(p => p.rating === 'thumbs_up').length;
+            this.thumbsDownCount = popularityList.filter(p => p.rating === 'thumbs_down').length;
+
+            const userRating = popularityList.find(p => p.userId === this.$store.state.user.id);
+            if (userRating) {
+                this.isThumbsUp = userRating.rating === 'thumbs_up';
+                this.isThumbsDown = userRating.rating === 'thumbs_down';
+            }
+        } catch (error) {
+            console.error('Error fetching popularity counts:', error);
+        }
+    },
+    async toggleThumbsUp() {
+        if (this.$store.state.token === '') {
+            this.$router.push({ name: 'login' });
+            return;
+        }
+        
+        if (this.isThumbsUp) {
+            await PopularityService.removePopularityFromLandmark(this.landmark.id, this.$store.state.user.id);
+            this.thumbsUpCount--;
+        } else {
+            if (this.isThumbsDown) {
+                await PopularityService.removePopularityFromLandmark(this.landmark.id, this.$store.state.user.id);
+                this.thumbsDownCount--;
+                this.isThumbsDown = false;
+            }
+            await PopularityService.addPopularity({
+                landmarkId: this.landmark.id,
+                userId: this.$store.state.user.id,
+                rating: 'thumbs_up'
+            });
+            this.thumbsUpCount++;
+        }
+        this.isThumbsUp = !this.isThumbsUp;
+    },
+    async toggleThumbsDown() {
+        if (this.$store.state.token === '') {
+            this.$router.push({ name: 'login' });
+            return;
+        }
+
+        if (this.isThumbsDown) {
+            await PopularityService.removePopularityFromLandmark(this.landmark.id, this.$store.state.user.id);
+            this.thumbsDownCount--;
+        } else {
+            if (this.isThumbsUp) {
+                await PopularityService.removePopularityFromLandmark(this.landmark.id, this.$store.state.user.id);
+                this.thumbsUpCount--;
+                this.isThumbsUp = false;
+            }
+            await PopularityService.addPopularity({
+                landmarkId: this.landmark.id,
+                userId: this.$store.state.user.id,
+                rating: 'thumbs_down'
+            });
+            this.thumbsDownCount++;
+        }
+        this.isThumbsDown = !this.isThumbsDown;
+    }
+}
+
 };
 </script>
 
@@ -92,6 +193,46 @@ export default {
     margin-left: 5px;
 }
 
+.popularity-background {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    width: 40%;
+    max-width: 200px;
+    border: rgb(176, 176, 176) 1px solid;
+}
+
+.popularity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: .7rem;
+}
+
+.popularity i {
+    cursor: pointer;
+    font-size: .9rem;
+    /* Adjusts the size of the icons */
+    width: 1.2rem;
+    /* Ensures icons maintain their smaller size */
+    height: 1.2rem;
+    line-height: 1.2rem;
+}
+
+.popularity i.thumbs-down {
+    transform: scaleX(-1);
+    /* Flips the icon horizontally */
+}
+
+.active-up {
+    color: blue;
+}
+
+.active-down {
+    color: red;
+}
 
 @media (min-width: 600px) {
     .card {

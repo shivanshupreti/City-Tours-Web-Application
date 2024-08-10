@@ -37,7 +37,6 @@ CREATE TABLE Reviews (
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    rating thumbs NOT NULL,
     CONSTRAINT PK_reviews PRIMARY KEY (id),
     CONSTRAINT FK_reviews_landmark FOREIGN KEY (landmark_id) REFERENCES Landmarks(id) ON DELETE CASCADE,
     CONSTRAINT FK_reviews_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
@@ -59,6 +58,16 @@ CREATE TABLE ItineraryLandmarks (
     CONSTRAINT PK_itinerary_landmarks PRIMARY KEY (itinerary_id, landmark_id),
     CONSTRAINT FK_itinerary_landmarks_itinerary FOREIGN KEY (itinerary_id) REFERENCES Itineraries(id) ON DELETE CASCADE,
     CONSTRAINT FK_itinerary_landmarks_landmark FOREIGN KEY (landmark_id) REFERENCES Landmarks(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Popularity (
+    id SERIAL,
+    landmark_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    rating thumbs NOT NULL,
+    CONSTRAINT PK_popularity PRIMARY KEY (id),
+    CONSTRAINT FK_popularity_landmark FOREIGN KEY (landmark_id) REFERENCES Landmarks(id) ON DELETE CASCADE,
+    CONSTRAINT FK_popularity_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 COMMIT TRANSACTION;

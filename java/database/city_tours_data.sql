@@ -386,6 +386,14 @@ INSERT INTO ItineraryLandmarks (itinerary_id, landmark_id, order_num) VALUES
 (3, 17, 5),
 (3, 18, 6);
 
+INSERT INTO Popularity (landmark_id, user_id, rating) VALUES
+(1, 1, 'thumbs_up'),
+(2, 2, 'thumbs_down'),
+(3, 1, 'thumbs_up'),
+(4, 2, 'thumbs_up'),
+(5, 1, 'thumbs_down'),
+(6, 2, 'thumbs_up');
+
 COMMIT TRANSACTION;
 
 --Rollback transaction;
