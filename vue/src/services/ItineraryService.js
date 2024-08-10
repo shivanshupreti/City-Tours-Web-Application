@@ -52,6 +52,35 @@ import axios from 'axios';
 //     return Promise.reject(error);
 // });
 
+import router from '@/router/index.js'; 
+
+axios.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem('token');
+    console.log(`Token being used in request: ${token}`); // Log the token
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+      alert('Your session has timed out. You will be redirected to the login page.');
+      router.push('/logout');
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default {
     list(){
         return axios.get('/itineraries');

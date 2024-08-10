@@ -7,7 +7,7 @@
       <span v-if="!$store.state.token">|</span>
       <router-link v-bind:to="{ name: 'createItinerary' }" v-if="$store.state.token">Create Itinerary</router-link>
       <span v-if="$store.state.token">|</span>
-      <router-link v-bind:to="{ name: 'userItineraries' }" v-if="$store.state.token">Your Itineraries</router-link>
+      <router-link v-bind:to="{ name: 'userItineraries' }" v-if="$store.state.token">My Itineraries</router-link>
       <span v-if="$store.state.token">|</span>
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>
       <router-link v-bind:to="{ name: 'login' }" v-else>Login</router-link>

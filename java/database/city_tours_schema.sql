@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS ItineraryLandmarks, Itineraries, Reviews, LandmarkAvailability, Landmarks, Users;
+DROP TABLE IF EXISTS ItineraryLandmarks, Itineraries, Reviews, LandmarkAvailability, Landmarks, Users, Popularity;
 DROP TYPE IF EXISTS thumbs;
 CREATE TYPE thumbs AS ENUM ('thumbs_up', 'thumbs_down');
 CREATE TABLE users (
