@@ -106,9 +106,24 @@
   </script>
   
   <style scoped>
+   .itinerary-list{
+    max-width: 600px;
+    margin: 50px auto;
+    background: #ececec;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
+  h2{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
   .itinerary-table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 30px;
   }
   
   .itinerary-table th,
@@ -116,27 +131,96 @@
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-size: 1rem;
   }
   
   .itinerary-table th {
     background-color: #f2f2f2;
+    text-align: center;
+    font-weight: bold;
   }
   
   .edit-btn,
   .delete-btn {
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
     margin-right: 5px;
   }
+
+  .edit-btn {
+    background-color: #2196f3;
+  }
+
+  .edit-btn:hover {
+    background-color: #1976D2;
+  }
   
+  .delete-btn{
+    background-color: #f44336;
+  }
+
+  .delete-btn:hover {
+    background-color: #d32f2f;
+  }
+
   .edit-form {
     margin-top: 20px;
+    border: 2px wheat solid;
+    background: blanchedalmond;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
+  .edit-form h3{
+    text-align: center;
+    margin-bottom: 20px;
   }
   
   .edit-form div {
     margin-bottom: 10px;
   }
+
+  .edit-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .edit-form input {
+    width: 100%;
+    padding: 3%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
   
   .edit-form button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
     margin-right: 10px;
+  }
+
+  .edit-form button[type="submit"] {
+    background-color: #4CAF50;
+  }
+
+  .edit-form button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  .edit-form button[type="button"] {
+    background-color: #2196f3;
+  }
+
+  .edit-form button[type="button"]:hover {
+    background-color: #1976D2;
   }
   </style>
   
