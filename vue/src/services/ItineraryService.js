@@ -120,5 +120,14 @@ export default {
 
     getLandmarksByItinerary(itineraryId){
         return axios.get(`/itineraries/${itineraryId}/landmarks`);
-    }
+    },
+
+    getOptimizedRoute(origin, destinations) {
+      return axios.get('/itineraries/api/itinerary', {
+          params: {
+              origin: origin,
+              destinations: destinations
+          }
+      });
+  }
 };

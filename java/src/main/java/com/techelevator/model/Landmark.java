@@ -10,11 +10,12 @@ public class Landmark {
     private String venueType;
     private boolean approvalStatus;
     private String imageUrl;
+    private String placeId;
     private int orderNum;
 
     public Landmark() { }
 
-    public Landmark(int id, String name, String city, String description, String venueType, boolean approvalStatus, String imageUrl, int orderNum) {
+    public Landmark(int id, String name, String city, String description, String venueType, boolean approvalStatus, String imageUrl, String placeId, int orderNum) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -22,6 +23,7 @@ public class Landmark {
         this.venueType = venueType;
         this.approvalStatus = approvalStatus;
         this.imageUrl = imageUrl;
+        this.placeId = placeId;
         this.orderNum = orderNum;
     }
 
@@ -81,6 +83,14 @@ public class Landmark {
         this.imageUrl = imageUrl;
     }
 
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
     public int getOrderNum() {
         return orderNum;
     }
@@ -101,12 +111,13 @@ public class Landmark {
                 Objects.equals(city, landmark.city) &&
                 Objects.equals(description, landmark.description) &&
                 Objects.equals(venueType, landmark.venueType) &&
-                Objects.equals(imageUrl, landmark.imageUrl);
+                Objects.equals(imageUrl, landmark.imageUrl) &&
+                Objects.equals(placeId, landmark.placeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, city, description, venueType, approvalStatus, imageUrl, orderNum); // Include orderNum in hashCode
+        return Objects.hash(id, name, city, description, venueType, approvalStatus, imageUrl, placeId, orderNum); // Include orderNum in hashCode
     }
 
     @Override
@@ -119,6 +130,7 @@ public class Landmark {
                 ", venueType='" + venueType + '\'' +
                 ", approvalStatus=" + approvalStatus +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", placeId='" + placeId + '\'' +
                 ", orderNum=" + orderNum +
                 '}';
     }

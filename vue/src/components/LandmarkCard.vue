@@ -159,6 +159,7 @@ export default {
     height: 170px; 
     object-fit: cover;
     border-bottom: 2px solid wheat; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .landmark-name {
