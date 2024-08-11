@@ -104,18 +104,25 @@ public class JdbcItineraryDao implements ItineraryDao{
             int numberOfRows = jdbcTemplate.update(sql, itinerary.getName(), itinerary.getStartingPoint(), itinerary.getDate(), itinerary.isShared(),
                     id, userID);
 
-            if(numberOfRows == 0) {
+            if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
-            } else {
-                newItinerary = getItineraryById(itinerary.getId());
             }
+            removeLandmarksFromItinerary(id);
+            if (itinerary.getLandmarkList() != null) {
+                for (Landmark landmark : itinerary.getLandmarkList()) {
+                    addLandmarkToItinerary(id, landmark.getId(), landmark.getOrderNum());
+                }
+            }
+            newItinerary = getItineraryById(id);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+
         return newItinerary;
     }
+
     @Override
     public int deleteItineraryById(Integer id, Integer userId){
         int numOfRows = 0;
@@ -191,6 +198,11 @@ public class JdbcItineraryDao implements ItineraryDao{
             throw new DaoException("Unable to connect to server or database", e);
         }
         return itineraries;
+    }
+
+    public void removeLandmarksFromItinerary(int itineraryId) {
+        String sql = "DELETE FROM itinerarylandmarks WHERE itinerary_id = ?;";
+        jdbcTemplate.update(sql, itineraryId);
     }
 
     private Itinerary mapRowToItinerary(SqlRowSet rs){

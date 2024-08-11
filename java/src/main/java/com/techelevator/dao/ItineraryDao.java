@@ -24,4 +24,6 @@ public interface ItineraryDao {
 
     List<Itinerary> getSharedItinerariesByUserId(int userId);
 
+    void removeLandmarksFromItinerary(int itineraryId);
+
 }

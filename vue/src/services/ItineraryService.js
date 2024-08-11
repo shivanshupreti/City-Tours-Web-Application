@@ -111,14 +111,14 @@ export default {
     },
 
     addLandmarkToItinerary(itineraryId, landmarkId){
-        return axios.post(`/itinerary/${itineraryId}/landmark/${landmarkId}`);
+        return axios.post(`/itineraries/${itineraryId}/landmark/${landmarkId}`);
     },
 
     removeLandmarkFromItinerary(itineraryId, landmarkId){
-        return axios.delete(`/itinerary/${itineraryId}/landmark/${landmarkId}`);
+        return axios.delete(`/itineraries/${itineraryId}/landmark/${landmarkId}`);
     },
 
     getLandmarksByItinerary(itineraryId){
-        return axios.get(`/itinerary/${itineraryId}/landmarks`);
+        return axios.get(`/itineraries/${itineraryId}/landmarks`);
     }
 };
