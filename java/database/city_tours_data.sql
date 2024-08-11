@@ -6,14 +6,14 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 
 
 -- Paris landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, order_num)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, place_id, order_num)
 VALUES
-('Eiffel Tower', 'Paris', 'Iconic symbol of France and a must-visit.', 'Monument', TRUE, 'https://wallpapercat.com/w/middle-retina/1/a/2/30557-2880x1800-desktop-hd-eiffel-tower-background-photo.jpg', 1),
-('Louvre Museum', 'Paris', 'Home to the Mona Lisa and countless other masterpieces.', 'Museum', TRUE, 'https://media.architecturaldigest.com/photos/5900cc370638dd3b70018b33/16:9/w_1920,c_limit/Secrets%20of%20Louvre%201.jpg', 2),
-('Notre-Dame Cathedral', 'Paris', 'Famous Gothic cathedral.', 'Church', TRUE, 'https://c0.wallpaperflare.com/preview/713/515/606/cathedral-notre-dame-paris-morning-light.jpg', 3),
-('Arc de Triomphe', 'Paris', 'Prestigious avenue ending with the triumLandphal arch.', 'Avenue', TRUE, 'https://image.jimcdn.com/app/cms/image/transf/dimension=origxorig:format=jpg/path/se80bcf7e1bbfb507/image/i54f4e905929ff6b0/version/1305989812/image.jpg', 4),
-('Sacre Coeur Basilica', 'Paris', 'Stunning basilica on Montmartre hill.', 'Church', TRUE, 'https://static.wixstatic.com/media/68b72b_2a44b33c64d141e79bf5990d7ab10f64~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/68b72b_2a44b33c64d141e79bf5990d7ab10f64~mv2.jpg', 5),
-('Palace of Versailles', 'Paris', 'Luxurious former royal residence.', 'Palace', TRUE, 'https://www.travelandleisure.com/thmb/sR2kS_tl_yz4bxFkxDWyaVv6lmw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/versailles-palace-courtyard-SECRET1216-911d9538288141a686474b1ce08a2e1a.jpg', 6);
+('Eiffel Tower', 'Paris', 'Iconic symbol of France and a must-visit.', 'Monument', TRUE, 'https://wallpapercat.com/w/middle-retina/1/a/2/30557-2880x1800-desktop-hd-eiffel-tower-background-photo.jpg', 'ChIJLU7jZClu5kcR4PcOOO6p3I0', 1),
+('Louvre Museum', 'Paris', 'Home to the Mona Lisa and countless other masterpieces.', 'Museum', TRUE, 'https://media.architecturaldigest.com/photos/5900cc370638dd3b70018b33/16:9/w_1920,c_limit/Secrets%20of%20Louvre%201.jpg', 'ChIJD3uTd9hx5kcR1IQvGfr8dbk', 2),
+('Notre-Dame Cathedral', 'Paris', 'Famous Gothic cathedral.', 'Church', TRUE, 'https://c0.wallpaperflare.com/preview/713/515/606/cathedral-notre-dame-paris-morning-light.jpg', 'ChIJATr1n-Fx5kcRjQb6q6cdQDY', 3),
+('Arc de Triomphe', 'Paris', 'Prestigious avenue ending with the triumLandphal arch.', 'Avenue', TRUE, 'https://image.jimcdn.com/app/cms/image/transf/dimension=origxorig:format=jpg/path/se80bcf7e1bbfb507/image/i54f4e905929ff6b0/version/1305989812/image.jpg', 'ChIJjx37cOxv5kcRPWQuEW5ntdk', 4),
+('Sacre Coeur Basilica', 'Paris', 'Stunning basilica on Montmartre hill.', 'Church', TRUE, 'https://static.wixstatic.com/media/68b72b_2a44b33c64d141e79bf5990d7ab10f64~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/68b72b_2a44b33c64d141e79bf5990d7ab10f64~mv2.jpg', 'ChIJg8vfy1xu5kcRA1tGDNGsgHA', 5),
+('Palace of Versailles', 'Paris', 'Luxurious former royal residence.', 'Palace', TRUE, 'https://www.travelandleisure.com/thmb/sR2kS_tl_yz4bxFkxDWyaVv6lmw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/versailles-palace-courtyard-SECRET1216-911d9538288141a686474b1ce08a2e1a.jpg', 'ChIJdUyx15R95kcRj85ZX8H8OAU', 6);
 
 -- Eiffel Tower availability
 INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_time) VALUES
@@ -76,14 +76,14 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (6, 'Sunday', '09:00:00', '18:30:00');
 
 -- Rome landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, order_num)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, place_id, order_num)
 VALUES
-('Colosseum', 'Rome', 'Ancient amphitheater and symbol of Rome.', 'Amphitheater', TRUE, 'https://qph.cf2.quoracdn.net/main-qimg-922835f781d6eb3999c1a7cda092c850', 1),
-('St. Peter''s Basilica', 'Rome', 'Seat of the Catholic Church and home to Michelangelo''s artwork.', 'Religious Site', TRUE, 'https://travelforawhile.com/wp-content/uploads/2023/05/The-Vatican-St.-Peters-Basilica.jpg', 2),
-('Pantheon', 'Rome', 'Well-preserved ancient Roman temple.', 'Temple', TRUE, 'https://www.archeoroma.org/wp-content/uploads/2016/10/pantheon-rome-dome.jpg', 3),
-('Trevi Fountain', 'Rome', 'Famous Baroque fountain.', 'Fountain', TRUE, 'https://www.travelandleisure.com/thmb/CKxA_iBAtx1zYw_7EevV4cuxgH0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/trevi-fountain-rome-italy-TREVI0217-4b6f7385c7f0436ba3d5fa2c061a1791.jpg', 4),
-('Roman Forum', 'Rome', 'Ancient center of Roman public life.', 'Historical Site', TRUE, 'https://static.wixstatic.com/media/e41b5c_8e39787f991543fd97451f50d467ae01~mv2.jpg/v1/fill/w_2500,h_1666,al_c/e41b5c_8e39787f991543fd97451f50d467ae01~mv2.jpg', 5),
-('Piazza Navona', 'Rome', 'Elegant square with beautiful fountains and architecture.', 'Square', TRUE, 'https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/27/88/12.jpg', 6);
+('Colosseum', 'Rome', 'Ancient amphitheater and symbol of Rome.', 'Amphitheater', TRUE, 'https://qph.cf2.quoracdn.net/main-qimg-922835f781d6eb3999c1a7cda092c850', 'ChIJrRMgU7ZhLxMRxAOFkC7I8Sg', 1),
+('St. Peter''s Basilica', 'Rome', 'Seat of the Catholic Church and home to Michelangelo''s artwork.', 'Religious Site', TRUE, 'https://travelforawhile.com/wp-content/uploads/2023/05/The-Vatican-St.-Peters-Basilica.jpg', 'ChIJWZsUt2FgLxMRg1KHzXfwS3I', 2),
+('Pantheon', 'Rome', 'Well-preserved ancient Roman temple.', 'Temple', TRUE, 'https://www.archeoroma.org/wp-content/uploads/2016/10/pantheon-rome-dome.jpg', 'ChIJqUCGZ09gLxMRLM42IPpl0co', 3),
+('Trevi Fountain', 'Rome', 'Famous Baroque fountain.', 'Fountain', TRUE, 'https://www.travelandleisure.com/thmb/CKxA_iBAtx1zYw_7EevV4cuxgH0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/trevi-fountain-rome-italy-TREVI0217-4b6f7385c7f0436ba3d5fa2c061a1791.jpg', 'ChIJ1UCDJ1NgLxMRtrsCzOHxdvY', 4),
+('Roman Forum', 'Rome', 'Ancient center of Roman public life.', 'Historical Site', TRUE, 'https://static.wixstatic.com/media/e41b5c_8e39787f991543fd97451f50d467ae01~mv2.jpg/v1/fill/w_2500,h_1666,al_c/e41b5c_8e39787f991543fd97451f50d467ae01~mv2.jpg', 'ChIJ782pg7NhLxMR5n3swAdAkfo', 5),
+('Piazza Navona', 'Rome', 'Elegant square with beautiful fountains and architecture.', 'Square', TRUE, 'https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/27/88/12.jpg', 'ChIJPRydwYNgLxMRSjOCLlYkV6M', 6);
 
 -- Colosseum availability
 INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_time) VALUES
@@ -146,14 +146,14 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (12, 'Sunday', '00:00:00', '23:59:59');
 
 -- Kyoto landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, order_num)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, place_id, order_num)
 VALUES
-('Fushimi Inari Shrine', 'Kyoto', 'Known for its thousands of red torii gates.', 'Shrine', TRUE, 'https://static.toiimg.com/photo/55979195.cms', 1),
-('Kinkaku-ji', 'Kyoto', 'Stunning golden temple.', 'Temple', TRUE, 'https://www.jal.co.jp/vn/en/guide-to-japan/destinations/articles/kyoto/5-must-see-temples-in-ancient-capital/_jcr_content/root/responsivegrid/sectioncontainer_cop/image_2147354233.coreimg.jpeg/1697607575940.jpeg', 2),
-('Kiyomizu-dera', 'Kyoto', 'Historic temple with a large wooden stage.', 'Temple', TRUE, 'https://media.patheos.com/~/media/patheos-images/images/sacred-spaces/90-kiyomizu-dera-05_credit-shutterstock.jpg?as=1&w=800', 3),
-('Arashiyama Bamboo Grove', 'Kyoto', 'Serene bamboo forest.', 'Forest', TRUE, 'https://lp-cms-production.imgix.net/2019-06/0bbf98a5a2d3a65c4e17feb1baa630ff-arashiyama-bamboo-grove.jpg', 4),
-('Nijo Castle', 'Kyoto', 'Historic castle with beautiful gardens.', 'Castle', TRUE, 'https://tabijikan.com/kys/lang/en/wp-content/uploads/2016/02/20150309-304-20-100.jpg', 5),
-('Gion District', 'Kyoto', 'Traditional geisha district with preserved architecture.', 'District', TRUE, 'https://media.timeout.com/images/106106593/image.jpg', 6);
+('Fushimi Inari Shrine', 'Kyoto', 'Known for its thousands of red torii gates.', 'Shrine', TRUE, 'https://static.toiimg.com/photo/55979195.cms', 'ChIJIW0uPRUPAWAR6eI6dRzKGns', 1),
+('Kinkaku-ji', 'Kyoto', 'Stunning golden temple.', 'Temple', TRUE, 'https://www.jal.co.jp/vn/en/guide-to-japan/destinations/articles/kyoto/5-must-see-temples-in-ancient-capital/_jcr_content/root/responsivegrid/sectioncontainer_cop/image_2147354233.coreimg.jpeg/1697607575940.jpeg', 'ChIJvUbrwCCoAWARX2QiHCsn5A4', 2),
+('Kiyomizu-dera', 'Kyoto', 'Historic temple with a large wooden stage.', 'Temple', TRUE, 'https://media.patheos.com/~/media/patheos-images/images/sacred-spaces/90-kiyomizu-dera-05_credit-shutterstock.jpg?as=1&w=800', 'ChIJB_vchdMIAWARujTEUIZlr2I', 3),
+('Arashiyama Bamboo Grove', 'Kyoto', 'Serene bamboo forest.', 'Forest', TRUE, 'https://lp-cms-production.imgix.net/2019-06/0bbf98a5a2d3a65c4e17feb1baa630ff-arashiyama-bamboo-grove.jpg', 'ChIJrYtcv-urAWAR3XzWvXv8n_s', 4),
+('Nijo Castle', 'Kyoto', 'Historic castle with beautiful gardens.', 'Castle', TRUE, 'https://tabijikan.com/kys/lang/en/wp-content/uploads/2016/02/20150309-304-20-100.jpg', 'ChIJC5srCtQHAWARLy9qkFmHaxA', 5),
+('Gion District', 'Kyoto', 'Traditional geisha district with preserved architecture.', 'District', TRUE, 'https://media.timeout.com/images/106106593/image.jpg', 'ChIJ39JafQAJAWART9ih3YcxvVQ', 6);
 
 -- Fushimi Inari Shrine availability
 INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_time) VALUES
@@ -216,14 +216,14 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (18, 'Sunday', '10:00:00', '19:00:00');
 
 -- New York City landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, order_num)
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, place_id, order_num)
 VALUES
-('Statue of Liberty', 'New York City', 'Iconic symbol of freedom and democracy.', 'Monument', TRUE, 'https://cdn1.epicgames.com/ue/product/Featured/StatueOfLiberty_featured-894x488-d1f9ab8763773da5a0cc370b753211f1.png', 1),
-('Central Park', 'New York City', 'Large urban park offering numerous activities.', 'Park', TRUE, 'https://lik.com/cdn/shop/products/Peter-Lik-Central-Park-Spirit-Framed-Recess-Moun_1024x1024.jpg?v=1670363959', 2),
-('Times Square', 'New York City', 'Bustling commercial and entertainment hub.', 'Square', TRUE, 'https://images.ctfassets.net/1aemqu6a6t65/46MJ6ER585Rwl3NraEIoGL/784c5eb5d87f576b5548b1a2255f08e7/tripadvisortimessquare_taggeryanceyiv_5912?w=1200&h=800&q=75', 3),
-('Empire State Building', 'New York City', 'Famous skyscraper with observation decks.', 'Skyscraper', TRUE, 'https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/crm/newyorkstate/GettyImages-486334510_CC36FC20-0DCE-7408-77C72CD93ED4A476-cc36f9e70fc9b45_cc36fc73-07dd-b6b3-09b619cd4694393e.jpg', 4),
-('Brooklyn Bridge', 'New York City', 'Historic suspension bridge.', 'Bridge', TRUE, 'https://muralsyourway.vtexassets.com/arquivos/ids/234586/Brooklyn-Bridge-and-NYC-Skyline-at-Night-Wall-Mural.jpg?v=638165374098470000', 5),
-('Metropolitan Museum of Art', 'New York City', 'One of the world''s largest and finest art museums.', 'Museum', TRUE, 'https://media.cntraveler.com/photos/55d362f337284fb1079ccc4b/16:9/w_2560%2Cc_limit/metropolitan-museum-of-art-new-york-city.jpg', 6);
+('Statue of Liberty', 'New York City', 'Iconic symbol of freedom and democracy.', 'Monument', TRUE, 'https://cdn1.epicgames.com/ue/product/Featured/StatueOfLiberty_featured-894x488-d1f9ab8763773da5a0cc370b753211f1.png', 'ChIJPTacEpBQwokRKwIlDXelxkA', 1),
+('Central Park', 'New York City', 'Large urban park offering numerous activities.', 'Park', TRUE, 'https://lik.com/cdn/shop/products/Peter-Lik-Central-Park-Spirit-Framed-Recess-Moun_1024x1024.jpg?v=1670363959', 'ChIJ4zGFAZpYwokRGUGph3Mf37k', 2),
+('Times Square', 'New York City', 'Bustling commercial and entertainment hub.', 'Square', TRUE, 'https://images.ctfassets.net/1aemqu6a6t65/46MJ6ER585Rwl3NraEIoGL/784c5eb5d87f576b5548b1a2255f08e7/tripadvisortimessquare_taggeryanceyiv_5912?w=1200&h=800&q=75', 'ChIJmQJIxlVYwokRLgeuocVOGVU', 3),
+('Empire State Building', 'New York City', 'Famous skyscraper with observation decks.', 'Skyscraper', TRUE, 'https://assets.simpleviewinc.com/simpleview/image/upload/c_limit,h_1200,q_75,w_1200/v1/crm/newyorkstate/GettyImages-486334510_CC36FC20-0DCE-7408-77C72CD93ED4A476-cc36f9e70fc9b45_cc36fc73-07dd-b6b3-09b619cd4694393e.jpg', 'ChIJaXQRs6lZwokRY6EFpJnhNNE', 4),
+('Brooklyn Bridge', 'New York City', 'Historic suspension bridge.', 'Bridge', TRUE, 'https://muralsyourway.vtexassets.com/arquivos/ids/234586/Brooklyn-Bridge-and-NYC-Skyline-at-Night-Wall-Mural.jpg?v=638165374098470000', 'ChIJK3vOQyNawokRXEa9errdJiU', 5),
+('Metropolitan Museum of Art', 'New York City', 'One of the world''s largest and finest art museums.', 'Museum', TRUE, 'https://media.cntraveler.com/photos/55d362f337284fb1079ccc4b/16:9/w_2560%2Cc_limit/metropolitan-museum-of-art-new-york-city.jpg', 'ChIJb8Jg9pZYwokR-qHGtvSkLzs', 6);
 
 -- Statue of Liberty availability
 INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_time) VALUES
@@ -285,15 +285,15 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (24, 'Saturday', '10:00:00', '21:00:00'),
 (24, 'Sunday', '10:00:00', '17:00:00');
 
--- Sydney landmarks
-INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, order_num)
+--Sydney
+INSERT INTO landmarks (name, city, description, venue_type, approval_status, place_id, image_url, order_num)
 VALUES
-('Sydney Opera House', 'Sydney', 'Iconic performing arts center.', 'Theater', TRUE, 'https://ychef.files.bbci.co.uk/1280x720/p0gp95cq.jpg', 1),
-('Sydney Harbour Bridge', 'Sydney', 'Famous bridge with climbing tours.', 'Bridge', TRUE, 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Sydney_harbour_bridge_dusk.jpg/1200px-Sydney_harbour_bridge_dusk.jpg', 2),
-('Bondi Beach', 'Sydney', 'Popular beach known for surfing.', 'Beach', TRUE, 'https://blog.forbestravelguide.com/wp-content/uploads/2013/12/FTG-AussieBeach-CreditiStock_KimPinTan.jpg', 3),
-('Taronga Zoo', 'Sydney', 'Large zoo with diverse wildlife.', 'Zoo', TRUE, 'https://dbijapkm3o6fj.cloudfront.net/resources/1282,1004,1,6,4,0,600,450/-4601-/20150311175809/taronga-zoo.jpeg', 4),
-('Royal Botanic Garden', 'Sydney', 'Beautiful botanical gardens by the harbor.', 'Garden', TRUE, 'https://media.istockphoto.com/id/510641020/photo/botanic-gardens-alley.jpg?s=612x612&w=0&k=20&c=Ph43mpMMUVxV7w90YlAahbGX9Z5uOVAoXCuldewvlHk=', 5),
-('The Rocks', 'Sydney', 'Historic area with markets, museums, and restaurants.', 'Historic District', TRUE, 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/02/50/02/sydney-s-first-street.jpg?w=1200&h=-1&s=1', 6);
+('Sydney Opera House', 'Sydney', 'Iconic performing arts center.', 'Theater', TRUE, 'ChIJ3S-JXmauEmsRUcIaWtf4MzE', 'https://ychef.files.bbci.co.uk/1280x720/p0gp95cq.jpg', 1),
+('Sydney Harbour Bridge', 'Sydney', 'Famous bridge with climbing tours.', 'Bridge', TRUE, 'Ei1TeWRuZXkgSGJyIEJyZywgVGhlIFJvY2tzIE5TVyAyMDAwLCBBdXN0cmFsaWEiLiosChQKEgkFrsgVi64SaxGftdSd9hwMLxIUChIJs49dtkKuEmsRYM0yFmh9AQU', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Sydney_harbour_bridge_dusk.jpg/1200px-Sydney_harbour_bridge_dusk.jpg', 2),
+('Bondi Beach', 'Sydney', 'Popular beach known for surfing.', 'Beach', TRUE, 'ChIJWTi8xgGyEmsRgK0yFmh9AQU' ,'https://blog.forbestravelguide.com/wp-content/uploads/2013/12/FTG-AussieBeach-CreditiStock_KimPinTan.jpg', 3),
+('Taronga Zoo', 'Sydney', 'Large zoo with diverse wildlife.', 'Zoo', TRUE, 'ChIJq6qqWiSsEmsRJuIpepyEua4' , 'https://dbijapkm3o6fj.cloudfront.net/resources/1282,1004,1,6,4,0,600,450/-4601-/20150311175809/taronga-zoo.jpeg', 4),
+('Royal Botanic Garden', 'Sydney', 'Beautiful botanical gardens by the harbor.', 'Garden', TRUE, 'ChIJWaTdYGuuEmsRoOfx-Wh9AQ8', 'https://media.istockphoto.com/id/510641020/photo/botanic-gardens-alley.jpg?s=612x612&w=0&k=20&c=Ph43mpMMUVxV7w90YlAahbGX9Z5uOVAoXCuldewvlHk=', 5),
+('The Rocks', 'Sydney', 'Historic area with markets, museums, and restaurants.', 'Historic District', TRUE, 'ChIJs49dtkKuEmsRYM0yFmh9AQU' , 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/02/50/02/sydney-s-first-street.jpg?w=1200&h=-1&s=1', 6);
 
 -- Sydney Opera House availability
 INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_time) VALUES
@@ -395,7 +395,3 @@ INSERT INTO Popularity (landmark_id, user_id, rating) VALUES
 (6, 2, 'thumbs_up');
 
 COMMIT TRANSACTION;
-
---Rollback transaction;
-
-

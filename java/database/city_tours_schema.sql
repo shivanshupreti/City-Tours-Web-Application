@@ -1,5 +1,4 @@
 BEGIN TRANSACTION;
-
 DROP TABLE IF EXISTS ItineraryLandmarks, Itineraries, Reviews, LandmarkAvailability, Landmarks, Users, Popularity;
 DROP TYPE IF EXISTS thumbs;
 CREATE TYPE thumbs AS ENUM ('thumbs_up', 'thumbs_down');
@@ -18,6 +17,7 @@ CREATE TABLE Landmarks (
     venue_type VARCHAR(50) NOT NULL,
     approval_status BOOLEAN NOT NULL DEFAULT FALSE,
 	image_url VARCHAR(750),
+	place_id VARCHAR(250) UNIQUE,
 	order_num int NOT NULL,
     CONSTRAINT PK_landmarks PRIMARY KEY (id)
 );
@@ -59,7 +59,6 @@ CREATE TABLE ItineraryLandmarks (
     CONSTRAINT FK_itinerary_landmarks_itinerary FOREIGN KEY (itinerary_id) REFERENCES Itineraries(id) ON DELETE CASCADE,
     CONSTRAINT FK_itinerary_landmarks_landmark FOREIGN KEY (landmark_id) REFERENCES Landmarks(id) ON DELETE CASCADE
 );
-
 CREATE TABLE Popularity (
     id SERIAL,
     landmark_id INTEGER NOT NULL,
@@ -69,10 +68,16 @@ CREATE TABLE Popularity (
     CONSTRAINT FK_popularity_landmark FOREIGN KEY (landmark_id) REFERENCES Landmarks(id) ON DELETE CASCADE,
     CONSTRAINT FK_popularity_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
-
 COMMIT TRANSACTION;
 
---Rollback transaction;
+
+
+
+
+
+
+
+
 
 
 
