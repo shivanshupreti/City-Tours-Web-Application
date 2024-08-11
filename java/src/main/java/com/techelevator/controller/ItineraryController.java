@@ -6,12 +6,15 @@ import com.techelevator.model.Itinerary;
 import com.techelevator.model.ItineraryLandmarks;
 import com.techelevator.model.Landmark;
 import com.techelevator.model.User;
+import com.techelevator.services.DistanceMatrixService;
+import com.techelevator.services.TSPAlgorithm;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
@@ -20,11 +23,13 @@ import java.util.List;
 public class ItineraryController {
     private final ItineraryDao itineraryDao;
     private final UserDao userDao;
+    private DistanceMatrixService distanceMatrixService;
 
 
-    public ItineraryController(ItineraryDao itineraryDao, UserDao userDao) {
+    public ItineraryController(ItineraryDao itineraryDao, UserDao userDao, DistanceMatrixService distanceMatrixService) {
         this.itineraryDao = itineraryDao;
         this.userDao = userDao;
+        this.distanceMatrixService = distanceMatrixService;
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -129,4 +134,22 @@ public class ItineraryController {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/api/itinerary")
+    public List<String> getItinerary(
+            @RequestParam String origin,
+            @RequestParam List<String> destinations
+    ) {
+        // Call the service to get the distance matrix
+        int[][] distanceMatrix = distanceMatrixService.getDistanceMatrix(origin, destinations);
+        TSPAlgorithm tspAlgorithm = new TSPAlgorithm();
+        List<Integer> routeOrder = tspAlgorithm.calculateShortestRoute(distanceMatrix);
+
+        // Create the itinerary based on the route order
+        List<String> itinerary = routeOrder.stream()
+                .map(destinations::get)
+                .collect(Collectors.toList());
+
+        return itinerary;
+    }
 }
