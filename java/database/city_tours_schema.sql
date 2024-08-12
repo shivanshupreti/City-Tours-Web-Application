@@ -1,5 +1,5 @@
 BEGIN TRANSACTION;
-DROP TABLE IF EXISTS ItineraryLandmarks, Itineraries, Reviews, LandmarkAvailability, Landmarks, Users, Popularity;
+DROP TABLE IF EXISTS ItineraryLandmarks, Itineraries, Reviews, LandmarkAvailability, Landmarks, Users, Popularity, StartingPoint;
 DROP TYPE IF EXISTS thumbs;
 CREATE TYPE thumbs AS ENUM ('thumbs_up', 'thumbs_down');
 CREATE TABLE users (
@@ -68,16 +68,20 @@ CREATE TABLE Popularity (
     CONSTRAINT FK_popularity_landmark FOREIGN KEY (landmark_id) REFERENCES Landmarks(id) ON DELETE CASCADE,
     CONSTRAINT FK_popularity_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
+
+CREATE TABLE StartingPoint (
+    id SERIAL,
+    place_name VARCHAR(100) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    place_type VARCHAR(50) NOT NULL,
+    place_id VARCHAR(250) UNIQUE,
+    CONSTRAINT PK_startingpoint PRIMARY KEY (id)
+);
+
 COMMIT TRANSACTION;
 
 
-
-
-
-
-
-
-
+--ROLLBACK;
 
 
 

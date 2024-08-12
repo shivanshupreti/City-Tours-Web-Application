@@ -75,6 +75,17 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (6, 'Saturday', '09:00:00', '18:30:00'),
 (6, 'Sunday', '09:00:00', '18:30:00');
 
+-- Paris Starting Points
+INSERT INTO StartingPoint (place_name, city, place_type, place_id)
+VALUES
+    ('Hotel Regina Louvre', 'Paris', 'Hotel', 'ChIJP_-HCS9u5kcRsj9b1x7Pl8w'),
+    ('Hotel Le Grand Mazarin', 'Paris', 'Hotel', 'ChIJHy_5-Axv5kcReGwZ_7kYB4s'),
+    ('Le Burgundy Paris', 'Paris', 'Hotel', 'ChIJb45b9TJu5kcR05gouvl8Fio'),
+    ('Paris Charles de Gaulle Airport', 'Paris', 'Airport', 'ChIJW89MjgM-5kcRLKZbL5jgKwQ'),
+    ('Paris-Orly Airport', 'Paris', 'Airport', 'ChIJHTtq-rF15kcRIoTbQ9feeJ0'),
+    ('Gare du Nord', 'Paris', 'Station', 'ChIJ28OuH25u5kcRXGGV095HB-s'),
+    ('Saint-Lazare Metro Station', 'Paris', 'Station', 'ChIJRQ5XWqNv5kcRKT549Q7N9Zc');
+
 -- Rome landmarks
 INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, place_id, order_num)
 VALUES
@@ -144,6 +155,18 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (12, 'Friday', '00:00:00', '23:59:59'),
 (12, 'Saturday', '00:00:00', '23:59:59'),
 (12, 'Sunday', '00:00:00', '23:59:59');
+
+-- Rome Starting Points
+INSERT INTO StartingPoint (place_name, city, place_type, place_id)
+VALUES
+    ('Palazzo Manfredi', 'Rome', 'Hotel', 'ChIJTVNJb7dhLxMRdE-kPPU1f_o'),
+    ('Hotel Artemide', 'Rome', 'Hotel', 'ChIJ-XEpPK9hLxMRCnJJKst12y4'),
+    ('Hotel Splendide Royal', 'Rome', 'Hotel', 'ChIJ3yLYfQBhLxMRHZtDqn639zc'),
+    ('Rome Fiumicino Airport', 'Rome', 'Airport', 'ChIJ-WL4kXT6JRMR1wSyXhDe1WQ'),
+    ('Rome Ciampino Airport', 'Rome', 'Airport', 'ChIJA-mdOLaIJRMRDVHFjx0Gtu0'),
+    ('Roma Termini', 'Rome', 'Station', 'ChIJP4qLeOBhLxMRtzaveEY7RaY'),
+    ('Roma San Pietro', 'Rome', 'Station', 'ChIJPYhLAmxgLxMRNtrYRZfvipE');
+
 
 -- Kyoto landmarks
 INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, place_id, order_num)
@@ -215,6 +238,18 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (18, 'Saturday', '10:00:00', '21:00:00'),
 (18, 'Sunday', '10:00:00', '19:00:00');
 
+-- Kyoto Starting Points
+INSERT INTO StartingPoint (place_name, city, place_type, place_id)
+VALUES
+    ('Park Hyatt Kyoto', 'Kyoto', 'Hotel', 'ChIJY1o_4kcJAWARy0VPcxQbz94'),
+    ('The Blossom Kyoto', 'Kyoto', 'Hotel', 'ChIJ493mM6MIAWARcgLmwPVqEMg'),
+    ('Hotel Okura Kyoto', 'Kyoto', 'Hotel', 'ChIJLS3WZJIIAWARqQv8aoODVqs'),
+    ('Kansai International Airport', 'Kyoto', 'Airport', 'ChIJ9_rNIxO5AGARiI-QjZ-ncfE'),
+    ('Itami Airport', 'Kyoto', 'Airport', 'ChIJuXeH9W3wAGARzfSdTYcaQQc'),
+    ('Kyoto Station', 'Kyoto', 'Station', 'ChIJ7wKLka4IAWARCByidG5EGrY'),
+    ('Nijo Station', 'Kyoto', 'Station', 'ChIJ2b4ClM0HAWARjkrNWXaOKu8');
+
+
 -- New York City landmarks
 INSERT INTO landmarks (name, city, description, venue_type, approval_status, image_url, place_id, order_num)
 VALUES
@@ -285,7 +320,19 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (24, 'Saturday', '10:00:00', '21:00:00'),
 (24, 'Sunday', '10:00:00', '17:00:00');
 
---Sydney
+-- New York City Starting Points
+INSERT INTO StartingPoint (place_name, city, place_type, place_id)
+VALUES
+    ('The Plaza Hotel', 'New York City', 'Hotel', 'ChIJPTacEpBQwokRmN7wRfrYJKg'),
+    ('The Ritz-Carlton New York', 'New York City', 'Hotel', 'ChIJE8ETqJhawokR6iHO0L-mBMU'),
+    ('Park Hyatt New York', 'New York City', 'Hotel', 'ChIJU8wmwj5YwokRXk4G02nSKi4'),
+    ('John F. Kennedy International Airport', 'New York City', 'Airport', 'ChIJ7cv00D5VwokRcDqqvMSyDV0'),
+    ('LaGuardia Airport', 'New York City', 'Airport', 'ChIJN0YIRbZZwokRLl95p4tsH9M'),
+    ('Penn Station', 'New York City', 'Station', 'ChIJl4hA2-ZZwokRLlqZDFu6-6E'),
+    ('Grand Central Terminal', 'New York City', 'Station', 'ChIJ7XBkOb9YwokR2p2XHy8gsjw');
+
+
+--Sydney Landmarks
 INSERT INTO landmarks (name, city, description, venue_type, approval_status, place_id, image_url, order_num)
 VALUES
 ('Sydney Opera House', 'Sydney', 'Iconic performing arts center.', 'Theater', TRUE, 'ChIJ3S-JXmauEmsRUcIaWtf4MzE', 'https://ychef.files.bbci.co.uk/1280x720/p0gp95cq.jpg', 1),
@@ -355,6 +402,18 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 (30, 'Saturday', '10:00:00', '17:00:00'),
 (30, 'Sunday', '10:00:00', '17:00:00');
 
+-- Sydney Starting Points
+INSERT INTO StartingPoint (place_name, city, place_type, place_id)
+VALUES
+    ('W Sydney', 'Sydney', 'Hotel', 'ChIJX1JXz_KvEmsRbZDJ2tHZY-0'),
+    ('The Langham, Sydney', 'Sydney', 'Hotel', 'ChIJk20mbUSuEmsR-cpy8veWnAg'),
+    ('Hyatt Regency Sydney', 'Sydney', 'Hotel', 'ChIJB_E7ITmuEmsRvpaogmLagvc'),
+    ('Kingsford Smith International Airport', 'Sydney', 'Airport', 'ChIJ24MzG_GwEmsRd2VLWl01368'),
+    ('Bankstown Airport', 'Sydney', 'Airport', 'ChIJeUF5Hnu-EmsRoHDv-Wh9AQ8'),
+    ('Central Railway Station', 'Sydney', 'Station', 'ChIJ1URX0SOuEmsRp4tE5Y4ewCE'),
+    ('Redfern Railway Station', 'Sydney', 'Station', 'ChIJRQDVBdqxEmsR5i8pv0ykUDI');
+
+
 -- Itineraries
 INSERT INTO Itineraries (user_id, name, starting_point, date, shared_status) VALUES
 (1, 'Paris Highlights', 'Hotel Le Meurice', '2024-08-15', TRUE),
@@ -395,3 +454,9 @@ INSERT INTO Popularity (landmark_id, user_id, rating) VALUES
 (6, 2, 'thumbs_up');
 
 COMMIT TRANSACTION;
+
+
+--ROLLBACK;
+
+
+
