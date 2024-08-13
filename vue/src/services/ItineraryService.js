@@ -122,7 +122,7 @@ export default {
         return axios.get(`/itineraries/${itineraryId}/landmarks`);
     },
 
-    getStartingPointByCity(city){
+    getStartingPointsByCity(city){
       return axios.get(`/itineraries/startingpoints/${city}`);
       },
 

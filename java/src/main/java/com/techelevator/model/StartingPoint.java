@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 import java.util.Objects;
 
-public class StartingPoints {
+public class StartingPoint {
     private int startingPointId;
     private String startingPointName;
 
@@ -12,9 +12,9 @@ public class StartingPoints {
 
     private String startingPlaceId;
 
-    public StartingPoints() {}
+    public StartingPoint() {}
 
-    public StartingPoints(int startingPointId, String startingPointName, String startingPointCity, String startingPointType, String startingPlaceId) {
+    public StartingPoint(int startingPointId, String startingPointName, String startingPointCity, String startingPointType, String startingPlaceId) {
         this.startingPointId = startingPointId;
         this.startingPointName = startingPointName;
         this.startingPointCity = startingPointCity;
@@ -65,8 +65,8 @@ public class StartingPoints {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof StartingPoints)) return false;
-        StartingPoints that = (StartingPoints) o;
+        if (!(o instanceof StartingPoint)) return false;
+        StartingPoint that = (StartingPoint) o;
         return getStartingPointId() == that.getStartingPointId() && Objects.equals(getStartingPointName(), that.getStartingPointName()) && Objects.equals(getStartingPointCity(), that.getStartingPointCity()) && Objects.equals(getStartingPointType(), that.getStartingPointType()) && Objects.equals(getStartingPlaceId(), that.getStartingPlaceId());
     }
 

@@ -135,7 +135,7 @@ public class ItineraryController {
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @RequestMapping(path = "/startingpoints/{city}", method = RequestMethod.GET)
-    public List<StartingPoints> getStartingPointsByCity(@PathVariable String city){
+    public List<StartingPoint> getStartingPointsByCity(@PathVariable String city){
         return itineraryDao.getStartingPointsByCity(city);
     }
 

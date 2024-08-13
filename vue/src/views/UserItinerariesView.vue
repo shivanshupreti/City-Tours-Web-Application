@@ -33,9 +33,24 @@
           <label for="name">Name:</label>
           <input type="text" v-model="selectedItinerary.name" required />
         </div>
-        <div>
+        <div class="form-group">
+          <label for="city">City:</label>
+          <select id="city" v-model="selectedCity" @change="fetchLandmarksAndStartingPoints" required>
+            <option value="Paris">Paris</option>
+            <option value="Rome">Rome</option>
+            <option value="Kyoto">Kyoto</option>
+            <option value="New York City">New York City</option>
+            <option value="Sydney">Sydney</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="startingPoint">Starting Point:</label>
-          <input type="text" v-model="selectedItinerary.startingPoint" required />
+          <select id="startingPoint" v-model="selectedItinerary.startingPoint" required>
+            <option v-for="startingPoint in availableStartingPoints" :key="startingPoint.id"
+              :value="startingPoint.startingPointName">
+              {{ startingPoint.startingPointName }}
+            </option>
+          </select>
         </div>
         <div>
           <label for="date">Date:</label>
@@ -46,16 +61,6 @@
           <select v-model="selectedItinerary.shared" required>
             <option :value="true">Yes</option>
             <option :value="false">No</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="city">City:</label>
-          <select id="city" v-model="selectedCity" @change="fetchLandmarks" required>
-            <option value="Paris">Paris</option>
-            <option value="Rome">Rome</option>
-            <option value="Kyoto">Kyoto</option>
-            <option value="New York City">New York City</option>
-            <option value="Sydney">Sydney</option>
           </select>
         </div>
         <div class="form-group" v-if="availableLandmarks.length > 0">
@@ -86,29 +91,48 @@ export default {
       itineraries: [],
       selectedItinerary: null,
       availableLandmarks: [],
+      availableStartingPoints: [], // State to hold available starting points
       selectedCity: '',
       firstCityChange: true,
     };
   },
   methods: {
-    async fetchLandmarks() {
+    async fetchLandmarksAndStartingPoints() {
       try {
-        const initialCity = this.selectedCity;
-        const response = await LandmarkService.listByCity(this.selectedCity);
-        this.availableLandmarks = response.data;
+        // Store the current starting point before making any changes
+        const currentStartingPoint = this.selectedItinerary.startingPoint;
+
+        const [landmarksResponse, startingPointsResponse] = await Promise.all([
+          LandmarkService.listByCity(this.selectedCity),
+          itineraryService.getStartingPointsByCity(this.selectedCity)
+        ]);
+
+        this.availableLandmarks = landmarksResponse.data;
+        this.availableStartingPoints = startingPointsResponse.data;
 
         if (this.selectedItinerary.landmarkList.length > 0 &&
           this.selectedItinerary.landmarkList[0].city !== this.selectedCity) {
 
           if (this.firstCityChange) {
-            const userConfirmed = window.confirm("Changing the city will reset the added landmarks. Do you want to continue?");
+            const userConfirmed = window.confirm("Changing the city will reset the added landmarks and starting points. Do you want to continue?");
 
             if (userConfirmed) {
+              // If confirmed, reset landmarks and fetch new starting points
               this.selectedItinerary.landmarkList = [];
+              // Reset the starting point to the default or the first option if needed
+              // this.selectedItinerary.startingPoint = this.availableStartingPoints[0]?.name || '';
             } else {
+              // If not confirmed, restore the previously selected starting point
               this.selectedCity = this.selectedItinerary.landmarkList[0].city;
-              const revertResponse = await LandmarkService.listByCity(this.selectedCity);
-              this.availableLandmarks = revertResponse.data;
+              const revertLandmarksResponse = await LandmarkService.listByCity(this.selectedCity);
+              const revertStartingPointsResponse = await itineraryService.getStartingPointsByCity(this.selectedCity);
+
+              this.availableLandmarks = revertLandmarksResponse.data;
+              this.availableStartingPoints = revertStartingPointsResponse.data;
+
+              // Restore the previous starting point
+              this.selectedItinerary.startingPoint = currentStartingPoint;
+
               return;
             }
 
@@ -116,8 +140,8 @@ export default {
           }
         }
       } catch (error) {
-        console.error("Error fetching landmarks:", error);
-        alert("There was an error fetching the landmarks. Please try again.");
+        console.error('Error fetching landmarks or starting points:', error);
+        alert('There was an error fetching the landmarks or starting points. Please try again.');
       }
     },
     fetchItineraries() {
@@ -133,7 +157,7 @@ export default {
     updateItinerary(itinerary) {
       this.selectedItinerary = { ...itinerary };
       this.selectedCity = itinerary.landmarkList[0]?.city || '';
-      this.fetchLandmarks();
+      this.fetchLandmarksAndStartingPoints();
       this.firstCityChange = true;
     },
     submitForm() {

@@ -3,7 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.Landmark;
-import com.techelevator.model.StartingPoints;
+import com.techelevator.model.StartingPoint;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -201,13 +201,13 @@ public class JdbcItineraryDao implements ItineraryDao{
         return itineraries;
     }
 
-    public List<StartingPoints> getStartingPointsByCity(String city){
-        List<StartingPoints> startingPoints = new ArrayList<>();
+    public List<StartingPoint> getStartingPointsByCity(String city){
+        List<StartingPoint> startingPoints = new ArrayList<>();
         String sql = "Select id, place_name, city, place_type, place_id FROM startingpoint WHERE city ILIKE  ?";
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, city);
             while (results.next()){
-                StartingPoints startingPoint = mapRowToStartingPoint(results);
+                StartingPoint startingPoint = mapRowToStartingPoint(results);
                 startingPoints.add(startingPoint);
             }
         }catch(CannotGetJdbcConnectionException e){
@@ -232,8 +232,8 @@ public class JdbcItineraryDao implements ItineraryDao{
         return itinerary;
     }
 
-    private StartingPoints mapRowToStartingPoint(SqlRowSet rs) {
-        StartingPoints startingPoint = new StartingPoints();
+    private StartingPoint mapRowToStartingPoint(SqlRowSet rs) {
+        StartingPoint startingPoint = new StartingPoint();
         startingPoint.setStartingPointId(rs.getInt("id"));
         startingPoint.setStartingPointName(rs.getString("place_name"));
         startingPoint.setStartingPointCity(rs.getString("city"));
