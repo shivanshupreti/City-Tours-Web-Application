@@ -12,7 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.file.Path;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -139,9 +141,28 @@ public class ItineraryController {
         return itineraryDao.getStartingPointsByCity(city);
     }
 
+//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+//    @GetMapping("/api/itinerary")
+//    public List<String> getItinerary(
+//            @RequestParam String origin,
+//            @RequestParam List<String> destinations
+//    ) {
+//        // Call the service to get the distance matrix
+//        int[][] distanceMatrix = distanceMatrixService.getDistanceMatrix(origin, destinations);
+//        TSPAlgorithm tspAlgorithm = new TSPAlgorithm();
+//        List<Integer> routeOrder = tspAlgorithm.calculateShortestRoute(distanceMatrix);
+//
+//        // Create the itinerary based on the route order
+//        List<String> itinerary = routeOrder.stream()
+//                .map(destinations::get)
+//                .collect(Collectors.toList());
+//
+//        return itinerary;
+//    }
+
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/api/itinerary")
-    public List<String> getItinerary(
+    public Map<String, Object> getItinerary(
             @RequestParam String origin,
             @RequestParam List<String> destinations
     ) {
@@ -151,10 +172,18 @@ public class ItineraryController {
         List<Integer> routeOrder = tspAlgorithm.calculateShortestRoute(distanceMatrix);
 
         // Create the itinerary based on the route order
-        List<String> itinerary = routeOrder.stream()
+        List<String> orderedDestinations = routeOrder.stream()
                 .map(destinations::get)
                 .collect(Collectors.toList());
 
-        return itinerary;
+        // Get coordinates for the destinations in the order determined by TSP
+        Map<String, Double[]> coordinates = distanceMatrixService.getCoordinatesForPlaceIds(orderedDestinations);
+
+        // Create response with itinerary and coordinates
+        Map<String, Object> response = new HashMap<>();
+        response.put("itinerary", orderedDestinations);
+        response.put("coordinates", coordinates);
+
+        return response;
     }
 }
