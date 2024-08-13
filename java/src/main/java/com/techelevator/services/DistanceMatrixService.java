@@ -2,6 +2,7 @@ package com.techelevator.services;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @Service
 public class DistanceMatrixService {
     private static final String GOOGLE_MAPS_API_URL = "https://maps.googleapis.com/maps/api/distancematrix/json";
@@ -44,7 +46,10 @@ public class DistanceMatrixService {
         for (int j = 0; j < elements.size(); j++) {
             Map<String, Object> element = elements.get(j);
             Map<String, Object> distance = (Map<String, Object>) element.get("distance");
-            distanceMatrix[0][j] = ((Double) distance.get("value")).intValue();
+
+            // Safely convert the value to Double first, then to int
+            Number distanceValue = (Number) distance.get("value");
+            distanceMatrix[0][j] = distanceValue.intValue();
         }
         return distanceMatrix;
     }

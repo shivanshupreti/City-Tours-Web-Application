@@ -141,6 +141,20 @@ public class ItineraryController {
         return itineraryDao.getStartingPointsByCity(city);
     }
 
+    @GetMapping("/startingpoint-place-id")
+    public String getStartingPlaceIdByName(@RequestParam String startingPointName) {
+        try {
+            String placeId = itineraryDao.getStartingPlaceIdByName(startingPointName);
+            if (placeId != null) {
+                return placeId;
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Starting place not found");
+            }
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An error occurred while retrieving the place ID", e);
+        }
+    }
+
 //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 //    @GetMapping("/api/itinerary")
 //    public List<String> getItinerary(

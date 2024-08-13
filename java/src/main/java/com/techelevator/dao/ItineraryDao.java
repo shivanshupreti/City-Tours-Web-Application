@@ -29,4 +29,6 @@ public interface ItineraryDao {
 
     List<StartingPoint> getStartingPointsByCity(String city);
 
+    String getStartingPlaceIdByName(String startingPointName);
+
 }

@@ -323,13 +323,13 @@ INSERT INTO LandmarkAvailability (landmark_id, day_of_week, open_time, close_tim
 -- New York City Starting Points
 INSERT INTO StartingPoint (place_name, city, place_type, place_id)
 VALUES
-    ('The Plaza Hotel', 'New York City', 'Hotel', 'ChIJPTacEpBQwokRmN7wRfrYJKg'),
-    ('The Ritz-Carlton New York', 'New York City', 'Hotel', 'ChIJE8ETqJhawokR6iHO0L-mBMU'),
-    ('Park Hyatt New York', 'New York City', 'Hotel', 'ChIJU8wmwj5YwokRXk4G02nSKi4'),
-    ('John F. Kennedy International Airport', 'New York City', 'Airport', 'ChIJ7cv00D5VwokRcDqqvMSyDV0'),
-    ('LaGuardia Airport', 'New York City', 'Airport', 'ChIJN0YIRbZZwokRLl95p4tsH9M'),
-    ('Penn Station', 'New York City', 'Station', 'ChIJl4hA2-ZZwokRLlqZDFu6-6E'),
-    ('Grand Central Terminal', 'New York City', 'Station', 'ChIJ7XBkOb9YwokR2p2XHy8gsjw');
+    ('The Plaza Hotel', 'New York City', 'Hotel', 'ChIJYaVdffBYwokRnTOoCzCq9mE'),
+    ('The Ritz-Carlton New York', 'New York City', 'Hotel', 'ChIJ4yNdwPBYwokRqc1lCC4n89w'),
+    ('Park Hyatt New York', 'New York City', 'Hotel', 'ChIJpQr2a_dYwokRoYDzhaXxroc'),
+    ('John F. Kennedy International Airport', 'New York City', 'Airport', 'ChIJR0lA1VBmwokR8BGfSBOyT-w'),
+    ('LaGuardia Airport', 'New York City', 'Airport', 'ChIJtU1Cg4lfwokRs2aWDmbEL3c'),
+    ('Penn Station', 'New York City', 'Station', 'ChIJ3bk6Qh1ZwokRqmwQsqJPmJQ'),
+    ('Grand Central Terminal', 'New York City', 'Station', 'ChIJ-b2RmVlZwokRpb1pwEQjss0');
 
 
 --Sydney Landmarks

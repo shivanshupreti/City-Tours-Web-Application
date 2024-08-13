@@ -6,6 +6,7 @@ import com.techelevator.model.Landmark;
 import com.techelevator.model.StartingPoint;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -214,6 +215,21 @@ public class JdbcItineraryDao implements ItineraryDao{
             throw new DaoException("Unable to connect to server or database", e);
         }
         return startingPoints;
+    }
+
+    @Override
+    public String getStartingPlaceIdByName(String startingPointName) {
+        String placeId = null;
+        String sql = "SELECT place_id FROM startingpoint WHERE place_name = ?;";
+        try {
+            placeId = jdbcTemplate.queryForObject(sql, String.class, startingPointName);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (EmptyResultDataAccessException e) {
+            // Handle case where no result is found
+            throw new DaoException("No starting place found with name: " + startingPointName, e);
+        }
+        return placeId;
     }
 
     public void removeLandmarksFromItinerary(int itineraryId) {

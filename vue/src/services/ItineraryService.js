@@ -26,7 +26,7 @@ import axios from 'axios';
 //     return response;
 // }, async error => {
 //     const originalRequest = error.config;
-    
+
 //     // Handle token expiration
 //     if (error.response.status === 401 && !originalRequest._retry) {
 //         originalRequest._retry = true;
@@ -52,7 +52,8 @@ import axios from 'axios';
 //     return Promise.reject(error);
 // });
 
-import router from '@/router/index.js'; 
+import router from '@/router/index.js';
+const API_URL = '/itineraries/api/itinerary';
 
 axios.interceptors.request.use(
   config => {
@@ -82,56 +83,65 @@ axios.interceptors.response.use(
 );
 
 export default {
-    list(){
-        return axios.get('/itineraries');
-    },
+  list() {
+    return axios.get('/itineraries');
+  },
 
-    getItinerary(id){
-        return axios.get(`/itineraries/${id}`);
-    },
+  getItinerary(id) {
+    return axios.get(`/itineraries/${id}`);
+  },
 
-    createItinerary(itinerary){
-        return axios.post('/itineraries/new', itinerary);
-    },
+  createItinerary(itinerary) {
+    return axios.post('/itineraries/new', itinerary);
+  },
 
-    updateItinerary(id, itinerary) {
-        return axios.put(`/itineraries/update/${id}`, itinerary, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-    },
+  updateItinerary(id, itinerary) {
+    return axios.put(`/itineraries/update/${id}`, itinerary, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  },
 
-    deleteItinerary(id){
-        return axios.delete(`/itineraries/deleteItinerary/${id}`);
-    },
+  deleteItinerary(id) {
+    return axios.delete(`/itineraries/deleteItinerary/${id}`);
+  },
 
-    listByUser(){ 
-        return axios.get(`/itineraries/yourItineraries`);
-    },
+  listByUser() {
+    return axios.get(`/itineraries/yourItineraries`);
+  },
 
-    addLandmarkToItinerary(itineraryId, landmarkId){
-        return axios.post(`/itineraries/${itineraryId}/landmark/${landmarkId}`);
-    },
+  addLandmarkToItinerary(itineraryId, landmarkId) {
+    return axios.post(`/itineraries/${itineraryId}/landmark/${landmarkId}`);
+  },
 
-    removeLandmarkFromItinerary(itineraryId, landmarkId){
-        return axios.delete(`/itineraries/${itineraryId}/landmark/${landmarkId}`);
-    },
+  removeLandmarkFromItinerary(itineraryId, landmarkId) {
+    return axios.delete(`/itineraries/${itineraryId}/landmark/${landmarkId}`);
+  },
 
-    getLandmarksByItinerary(itineraryId){
-        return axios.get(`/itineraries/${itineraryId}/landmarks`);
-    },
+  getLandmarksByItinerary(itineraryId) {
+    return axios.get(`/itineraries/${itineraryId}/landmarks`);
+  },
 
-    getStartingPointsByCity(city){
-      return axios.get(`/itineraries/startingpoints/${city}`);
-      },
+  getStartingPointsByCity(city) {
+    return axios.get(`/itineraries/startingpoints/${city}`);
+  },
 
-    getOptimizedRoute(origin, destinations) {
-      return axios.get('/itineraries/api/itinerary', {
-          params: {
-              origin: origin,
-              destinations: destinations
-          }
-      });
+  getStartingPlaceIdByName(startingPointName) {
+    return axios.get(`/itineraries/startingpoint-place-id`, {
+      params: { startingPointName }
+    });
+  },
+
+  getOptimizedRoute(origin, destinations) {
+    // Ensure destinations is a comma-separated string
+    const destinationsParam = Array.isArray(destinations) ? destinations.join(',') : destinations;
+
+    return axios.get(API_URL, {
+      params: {
+        origin: origin,
+        destinations: destinationsParam
+      }
+    });
   }
 };

@@ -19,13 +19,12 @@
             <div class="action-buttons">
               <button @click="updateItinerary(itinerary)" class="edit-btn">Edit</button>
               <button @click="deleteItinerary(itinerary.id)" class="delete-btn">Delete</button>
+              <button @click="viewRoute(itinerary)" class="view-btn">View Route</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
-
-    <!-- Edit Itinerary Form -->
     <div v-if="selectedItinerary" class="edit-form">
       <h3>Edit Itinerary</h3>
       <form @submit.prevent="submitForm">
@@ -91,7 +90,7 @@ export default {
       itineraries: [],
       selectedItinerary: null,
       availableLandmarks: [],
-      availableStartingPoints: [], // State to hold available starting points
+      availableStartingPoints: [],
       selectedCity: '',
       firstCityChange: true,
     };
@@ -119,8 +118,6 @@ export default {
             if (userConfirmed) {
               // If confirmed, reset landmarks and fetch new starting points
               this.selectedItinerary.landmarkList = [];
-              // Reset the starting point to the default or the first option if needed
-              // this.selectedItinerary.startingPoint = this.availableStartingPoints[0]?.name || '';
             } else {
               // If not confirmed, restore the previously selected starting point
               this.selectedCity = this.selectedItinerary.landmarkList[0].city;
@@ -129,8 +126,6 @@ export default {
 
               this.availableLandmarks = revertLandmarksResponse.data;
               this.availableStartingPoints = revertStartingPointsResponse.data;
-
-              // Restore the previous starting point
               this.selectedItinerary.startingPoint = currentStartingPoint;
 
               return;
@@ -208,6 +203,12 @@ export default {
           this.selectedItinerary.landmarkList.splice(index, 1);
         }
       }
+    },
+    viewRoute(itinerary) {
+      this.$router.push({
+        name: 'route',
+        query: { id: itinerary.id }
+      });
     },
   },
   created() {
@@ -397,5 +398,13 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #45A049;
+}
+
+.view-btn {
+  background-color: #ffa500;
+}
+
+.view-btn:hover {
+  background-color: #ff8c00;
 }
 </style>
