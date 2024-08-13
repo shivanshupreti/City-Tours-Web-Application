@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.file.Path;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,9 +156,10 @@ public class ItineraryController {
         }
     }
 
+
 //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 //    @GetMapping("/api/itinerary")
-//    public List<String> getItinerary(
+//    public Map<String, Object> getItinerary(
 //            @RequestParam String origin,
 //            @RequestParam List<String> destinations
 //    ) {
@@ -167,11 +169,24 @@ public class ItineraryController {
 //        List<Integer> routeOrder = tspAlgorithm.calculateShortestRoute(distanceMatrix);
 //
 //        // Create the itinerary based on the route order
-//        List<String> itinerary = routeOrder.stream()
+//        List<String> orderedDestinations = routeOrder.stream()
 //                .map(destinations::get)
 //                .collect(Collectors.toList());
 //
-//        return itinerary;
+//        // Get coordinates for the destinations in the order determined by TSP
+//        Map<String, Double[]> coordinatesMap = distanceMatrixService.getCoordinatesForPlaceIds(destinations);
+//
+//        // Reorder the coordinates based on the itinerary
+//        List<Double[]> orderedCoordinates = orderedDestinations.stream()
+//                .map(coordinatesMap::get)
+//                .collect(Collectors.toList());
+//
+//        // Create response with itinerary and coordinates
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("itinerary", orderedDestinations); // List of place IDs in order
+//        response.put("coordinates", orderedCoordinates); // List of coordinates in order
+//
+//        return response;
 //    }
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
@@ -180,18 +195,25 @@ public class ItineraryController {
             @RequestParam String origin,
             @RequestParam List<String> destinations
     ) {
-        // Call the service to get the distance matrix
-        int[][] distanceMatrix = distanceMatrixService.getDistanceMatrix(origin, destinations);
+        // Add the origin to the list of destinations for the matrix calculation
+        List<String> allPlaces = new ArrayList<>();
+        allPlaces.add(origin);
+        allPlaces.addAll(destinations);
+
+        // Call the service to get the distance matrix including origin
+        int[][] distanceMatrix = distanceMatrixService.getDistanceMatrix(origin, allPlaces);
+
+        // Remove the origin from the route order and set it at the start
         TSPAlgorithm tspAlgorithm = new TSPAlgorithm();
         List<Integer> routeOrder = tspAlgorithm.calculateShortestRoute(distanceMatrix);
 
-        // Create the itinerary based on the route order
+        // Create the itinerary based on the route order, starting with the origin
         List<String> orderedDestinations = routeOrder.stream()
-                .map(destinations::get)
+                .map(index -> allPlaces.get(index))
                 .collect(Collectors.toList());
 
         // Get coordinates for the destinations in the order determined by TSP
-        Map<String, Double[]> coordinatesMap = distanceMatrixService.getCoordinatesForPlaceIds(destinations);
+        Map<String, Double[]> coordinatesMap = distanceMatrixService.getCoordinatesForPlaceIds(allPlaces);
 
         // Reorder the coordinates based on the itinerary
         List<Double[]> orderedCoordinates = orderedDestinations.stream()
@@ -200,8 +222,8 @@ public class ItineraryController {
 
         // Create response with itinerary and coordinates
         Map<String, Object> response = new HashMap<>();
-        response.put("itinerary", orderedDestinations); // List of place IDs in order
-        response.put("coordinates", orderedCoordinates); // List of coordinates in order
+        response.put("itinerary", orderedDestinations); // List of place IDs in order, including origin
+        response.put("coordinates", orderedCoordinates); // List of coordinates in order, including origin
 
         return response;
     }

@@ -79,28 +79,27 @@ export default {
       return landmark ? landmark.name : placeId;
     },
     initMap() {
+      if (!this.optimizedRoute) return;
+
       const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 10,
         center: {
-          lat: this.optimizedRoute.coordinates[0][0], // Center on the starting coordinate
+          lat: this.optimizedRoute.coordinates[0][0],
           lng: this.optimizedRoute.coordinates[0][1],
         },
       });
 
-      // Create Directions Service and Renderer with suppressed markers
       const directionsService = new google.maps.DirectionsService();
       const directionsRenderer = new google.maps.DirectionsRenderer({
-        suppressMarkers: true, // Hide default markers
+        suppressMarkers: true,
       });
       directionsRenderer.setMap(map);
 
-      // Create the waypoints for the directions request
       const waypoints = this.optimizedRoute.itinerary.slice(1, -1).map((placeId, index) => ({
         location: new google.maps.LatLng(this.optimizedRoute.coordinates[index + 1][0], this.optimizedRoute.coordinates[index + 1][1]),
         stopover: true,
       }));
 
-      // Prepare the request for the directions service
       const request = {
         origin: new google.maps.LatLng(this.optimizedRoute.coordinates[0][0], this.optimizedRoute.coordinates[0][1]),
         destination: new google.maps.LatLng(this.optimizedRoute.coordinates[this.optimizedRoute.coordinates.length - 1][0], this.optimizedRoute.coordinates[this.optimizedRoute.coordinates.length - 1][1]),
@@ -108,7 +107,6 @@ export default {
         travelMode: 'DRIVING',
       };
 
-      // Request directions and display them on the map
       directionsService.route(request, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
           directionsRenderer.setDirections(result);
@@ -117,16 +115,15 @@ export default {
         }
       });
 
-      // Add custom markers for each location
       this.optimizedRoute.itinerary.forEach((placeId, index) => {
         const coords = this.optimizedRoute.coordinates[index];
-        const label = String.fromCharCode(65 + index); // Create labels: A, B, C, etc.
-        const address = this.getLandmarkName(placeId); // Get the address name
+        const label = String.fromCharCode(65 + index);
+        const address = this.getLandmarkName(placeId);
 
         const marker = new google.maps.Marker({
           position: { lat: coords[0], lng: coords[1] },
           map: map,
-          title: address, // Tooltip on hover
+          title: address,
           label: {
             text: label,
             color: "black",
@@ -135,12 +132,10 @@ export default {
           },
         });
 
-        // Create an info window with the address
         const infoWindow = new google.maps.InfoWindow({
           content: `<div>${address}</div>`,
         });
 
-        // Show the info window when the marker is clicked
         marker.addListener('click', () => {
           infoWindow.open(map, marker);
         });
