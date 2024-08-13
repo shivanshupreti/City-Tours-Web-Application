@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.Landmark;
+import com.techelevator.model.StartingPoints;
 
 import java.util.List;
 public interface ItineraryDao {
@@ -25,5 +26,7 @@ public interface ItineraryDao {
     List<Itinerary> getSharedItinerariesByUserId(int userId);
 
     void removeLandmarksFromItinerary(int itineraryId);
+
+    List<StartingPoints> getStartingPointsByCity(String city);
 
 }

@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.Landmark;
+import com.techelevator.model.StartingPoints;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -200,6 +201,21 @@ public class JdbcItineraryDao implements ItineraryDao{
         return itineraries;
     }
 
+    public List<StartingPoints> getStartingPointsByCity(String city){
+        List<StartingPoints> startingPoints = new ArrayList<>();
+        String sql = "Select id, place_name, city, place_type, place_id FROM startingpoint WHERE city ILIKE  ?";
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, city);
+            while (results.next()){
+                StartingPoints startingPoint = mapRowToStartingPoint(results);
+                startingPoints.add(startingPoint);
+            }
+        }catch(CannotGetJdbcConnectionException e){
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return startingPoints;
+    }
+
     public void removeLandmarksFromItinerary(int itineraryId) {
         String sql = "DELETE FROM itinerarylandmarks WHERE itinerary_id = ?;";
         jdbcTemplate.update(sql, itineraryId);
@@ -214,5 +230,15 @@ public class JdbcItineraryDao implements ItineraryDao{
         itinerary.setDate(rs.getDate("date").toLocalDate());
         itinerary.setShared(rs.getBoolean("shared_status"));
         return itinerary;
+    }
+
+    private StartingPoints mapRowToStartingPoint(SqlRowSet rs) {
+        StartingPoints startingPoint = new StartingPoints();
+        startingPoint.setStartingPointId(rs.getInt("id"));
+        startingPoint.setStartingPointName(rs.getString("place_name"));
+        startingPoint.setStartingPointCity(rs.getString("city"));
+        startingPoint.setStartingPointType(rs.getString("place_type"));
+        startingPoint.setStartingPlaceId(rs.getString("place_id"));
+        return startingPoint;
     }
 }
