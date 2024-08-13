@@ -191,12 +191,17 @@ public class ItineraryController {
                 .collect(Collectors.toList());
 
         // Get coordinates for the destinations in the order determined by TSP
-        Map<String, Double[]> coordinates = distanceMatrixService.getCoordinatesForPlaceIds(orderedDestinations);
+        Map<String, Double[]> coordinatesMap = distanceMatrixService.getCoordinatesForPlaceIds(destinations);
+
+        // Reorder the coordinates based on the itinerary
+        List<Double[]> orderedCoordinates = orderedDestinations.stream()
+                .map(coordinatesMap::get)
+                .collect(Collectors.toList());
 
         // Create response with itinerary and coordinates
         Map<String, Object> response = new HashMap<>();
-        response.put("itinerary", orderedDestinations);
-        response.put("coordinates", coordinates);
+        response.put("itinerary", orderedDestinations); // List of place IDs in order
+        response.put("coordinates", orderedCoordinates); // List of coordinates in order
 
         return response;
     }
