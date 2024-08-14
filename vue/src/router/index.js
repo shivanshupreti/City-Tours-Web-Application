@@ -10,6 +10,8 @@ import LandmarkDetailView from '../views/LandmarkDetailView.vue';
 import CreateItineraryView from '../views/CreateItineraryView.vue';
 import UserItinerariesView from '../views/UserItinerariesView.vue';
 import Route from '../views/Route.vue';
+import AddReviewView from '../views/AddReviewView.vue';
+import ReviewsView from '../views/ReviewsView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -88,6 +90,22 @@ const routes = [
     name: 'SharedItinerary',
     component: () => import('@/components/SharedRoute.vue'),
     props: route => ({ itineraryId: route.params.id })
+  },
+  {
+    path: "/landmarks/:id/add-review", 
+    name: "add-review",
+    component: AddReviewView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/landmarks/:id/reviews", 
+    name: "reviews",
+    component: ReviewsView,
+    meta: {
+      requiresAuth: false
+    }
   }
 
 ];
