@@ -116,21 +116,21 @@ public class ItineraryController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-    @RequestMapping(path = "/{itineraryId}/landmarks", method = RequestMethod.GET)
-    public List<Landmark> getLandmarksByItineraryId(@PathVariable int itineraryId) {
-        try {
-            return itineraryDao.getLandmarksByItineraryId(itineraryId);
-        } catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
+    @RequestMapping(path = "/shared/{id}", method = RequestMethod.GET)
+    public Itinerary getSharedItineraryById(@PathVariable Integer id) {
+        Itinerary itinerary = itineraryDao.getItineraryById(id);
+        if (itinerary.isShared()) {
+            return itinerary;
+        } else {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This itinerary is private.");
         }
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-    @RequestMapping(path = "/sharedItineraries", method = RequestMethod.GET)
-    public List<Itinerary> getSharedItinerariesByUserId(Principal principal) {
-        int userId = userDao.getUserByUsername(principal.getName()).getId();
+    @RequestMapping(path = "/{itineraryId}/landmarks", method = RequestMethod.GET)
+    public List<Landmark> getLandmarksByItineraryId(@PathVariable int itineraryId) {
         try {
-            return itineraryDao.getSharedItinerariesByUserId(userId);
+            return itineraryDao.getLandmarksByItineraryId(itineraryId);
         } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }

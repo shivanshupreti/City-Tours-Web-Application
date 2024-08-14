@@ -58,7 +58,7 @@ const API_URL = '/itineraries/api/itinerary';
 axios.interceptors.request.use(
   config => {
     const token = localStorage.getItem('token');
-    console.log(`Token being used in request: ${token}`); // Log the token
+    //console.log(`Token being used in request: ${token}`); // Log the token
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -131,6 +131,10 @@ export default {
     return axios.get(`/itineraries/startingpoint-place-id`, {
       params: { startingPointName }
     });
+  },
+
+  getSharedItineraryById(id) {
+    return axios.get(`/itineraries/shared/${id}`);
   },
 
   getOptimizedRoute(origin, destinations) {

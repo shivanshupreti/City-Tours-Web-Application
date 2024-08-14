@@ -3,17 +3,15 @@
         <h2>{{ itinerary.name }}</h2>
         <div id="map" style="height: 500px; width: 100%;"></div>
         <div v-if="optimizedRoute">
-    <div class="timeline">
-        <div v-for="(placeId, index) in optimizedRoute.itinerary" :key="index" class="timeline-item">
-            <div class="timeline-marker">{{ index + 1 }}</div>
-            <div class="timeline-content">
-                {{ index === 0 ? itinerary.startingPoint : getLandmarkName(placeId) }}
+            <div class="timeline">
+                <div v-for="(placeId, index) in optimizedRoute.itinerary" :key="index" class="timeline-item">
+                    <div class="timeline-marker">{{ index + 1 }}</div>
+                    <div class="timeline-content">
+                        {{ index === 0 ? itinerary.startingPoint : getLandmarkName(placeId) }}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    </div>
-        <button @click="shareUrl">Share Url</button>
         <button @click="goBack">Back to Itineraries</button>
     </div>
     <div v-else>
@@ -33,31 +31,27 @@ export default {
         };
     },
     async created() {
-        const itineraryId = this.$route.query.id;
+        const itineraryId = this.$route.params.id;
         if (itineraryId) {
             try {
-                const itineraryResponse = await itineraryService.getItinerary(itineraryId);
+                const itineraryResponse = await itineraryService.getSharedItineraryById(itineraryId);
                 this.itinerary = itineraryResponse.data;
 
-                // Get place ID for the starting point
                 const startingPointName = this.itinerary.startingPoint;
                 const placeIdResponse = await itineraryService.getStartingPlaceIdByName(startingPointName);
                 const origin = placeIdResponse.data;
 
-                // Prepare the data for getOptimizedRoute
                 const destinations = this.itinerary.landmarkList.map(landmark => landmark.placeId).join(',');
 
-                // Get the optimized route
                 const routeResponse = await itineraryService.getOptimizedRoute(origin, destinations);
                 this.optimizedRoute = routeResponse.data;
 
-                // Initialize the map after data is fetched
                 this.$nextTick(() => {
                     this.initMap();
                 });
             } catch (error) {
-                console.error("Error fetching itinerary, place ID, or optimized route:", error);
-                alert("There was an error fetching the itinerary, place ID, or optimized route. Please try again.");
+                console.error("Error fetching shared itinerary or optimized route:", error);
+                alert("There was an error fetching the shared itinerary or optimized route. Please try again.");
             }
         }
     },
@@ -137,14 +131,6 @@ export default {
                 });
             });
         },
-        shareUrl() {
-            if (this.itinerary.shared) {
-                const sharedUrl = `${window.location.origin}/Itineraries/shared/${this.itinerary.id}`;
-                prompt("Copy this URL to share:", sharedUrl);
-            } else {
-                alert("This Itinerary is private. Please edit the Itinerary and set it to shared to get a shareable URL.");
-            }
-          }  
     },
 };
 </script>

@@ -82,6 +82,12 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/itineraries/shared/:id',
+    name: 'SharedItinerary',
+    component: () => import('@/components/SharedRoute.vue'),
+    props: route => ({ itineraryId: route.params.id })
   }
 
 ];
