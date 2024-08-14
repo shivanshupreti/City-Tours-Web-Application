@@ -34,9 +34,13 @@ CREATE TABLE Reviews (
     id SERIAL,
     landmark_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
     title VARCHAR(100) NOT NULL,
+    rating INTEGER NOT NULL,
     description TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    approval_status BOOLEAN NOT NULL DEFAULT FALSE,
     CONSTRAINT PK_reviews PRIMARY KEY (id),
     CONSTRAINT FK_reviews_landmark FOREIGN KEY (landmark_id) REFERENCES Landmarks(id) ON DELETE CASCADE,
     CONSTRAINT FK_reviews_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
