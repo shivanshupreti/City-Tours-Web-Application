@@ -157,38 +157,6 @@ public class ItineraryController {
     }
 
 
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-//    @GetMapping("/api/itinerary")
-//    public Map<String, Object> getItinerary(
-//            @RequestParam String origin,
-//            @RequestParam List<String> destinations
-//    ) {
-//        // Call the service to get the distance matrix
-//        int[][] distanceMatrix = distanceMatrixService.getDistanceMatrix(origin, destinations);
-//        TSPAlgorithm tspAlgorithm = new TSPAlgorithm();
-//        List<Integer> routeOrder = tspAlgorithm.calculateShortestRoute(distanceMatrix);
-//
-//        // Create the itinerary based on the route order
-//        List<String> orderedDestinations = routeOrder.stream()
-//                .map(destinations::get)
-//                .collect(Collectors.toList());
-//
-//        // Get coordinates for the destinations in the order determined by TSP
-//        Map<String, Double[]> coordinatesMap = distanceMatrixService.getCoordinatesForPlaceIds(destinations);
-//
-//        // Reorder the coordinates based on the itinerary
-//        List<Double[]> orderedCoordinates = orderedDestinations.stream()
-//                .map(coordinatesMap::get)
-//                .collect(Collectors.toList());
-//
-//        // Create response with itinerary and coordinates
-//        Map<String, Object> response = new HashMap<>();
-//        response.put("itinerary", orderedDestinations); // List of place IDs in order
-//        response.put("coordinates", orderedCoordinates); // List of coordinates in order
-//
-//        return response;
-//    }
-
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/api/itinerary")
     public Map<String, Object> getItinerary(

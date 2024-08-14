@@ -1,36 +1,18 @@
 <template>
     <div class="route-view" v-if="itinerary">
-        <h2>{{ itinerary.name }} - Route</h2>
-        <p><strong>Starting Point:</strong> {{ itinerary.startingPoint }}</p>
-        <p><strong>Date:</strong> {{ itinerary.date }}</p>
-        <p><strong>Shared:</strong> {{ itinerary.shared ? 'Yes' : 'No' }}</p>
-
-        <h3>Landmarks</h3>
-        <ul>
-            <li v-for="landmark in itinerary.landmarkList" :key="landmark.id">
-                {{ landmark.name }}
-            </li>
-        </ul>
-
-        <h3>Optimized Route</h3>
+        <h2>{{ itinerary.name }}</h2>
+        <div id="map" style="height: 500px; width: 100%;"></div>
         <div v-if="optimizedRoute">
-            <h4>Order of Visit</h4>
-            <ul>
-                <li v-for="(placeId, index) in optimizedRoute.itinerary" :key="index">
-                    <span v-if="index === 0">
-                        <!-- Handle the first placeId with a prefix "A: " -->
-                        (A) {{ itinerary.startingPoint }}
-                    </span>
-                    <span v-else>
-                        <!-- Handle the rest of the placeIds with prefixes "B: ", "C: ", etc. -->
-                        ({{ String.fromCharCode(65 + index) }}) {{ getLandmarkName(placeId) }}
-                    </span>
-                </li>
-            </ul>
-
-            <div id="map" style="height: 500px; width: 100%;"></div>
+    <div class="timeline">
+        <div v-for="(placeId, index) in optimizedRoute.itinerary" :key="index" class="timeline-item">
+            <div class="timeline-marker">{{ index + 1 }}</div>
+            <div class="timeline-content">
+                {{ index === 0 ? itinerary.startingPoint : getLandmarkName(placeId) }}
+            </div>
         </div>
+    </div>
 
+    </div>
         <button @click="goBack">Back to Itineraries</button>
     </div>
     <div v-else>
@@ -39,6 +21,7 @@
 </template>
 
 <script>
+/* global google */
 import itineraryService from "@/services/ItineraryService";
 
 export default {
@@ -158,16 +141,65 @@ export default {
 </script>
 
 <style scoped>
+.timeline {
+    position: relative;
+    padding: 20px 0;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.timeline-item {
+    position: relative;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 2px solid #2196F3;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -18px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #2196F3;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border: none; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.timeline-content {
+    margin-left: 40px;
+}
+
 .route-view {
     max-width: 700px;
     margin: 50px auto;
     background: #ececec;
     padding: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 }
 
-h2,
+h2 {
+    font-size: 2rem; 
+    color: #333; 
+    font-weight: bold; 
+    text-align: center; 
+    margin-top: 10px; 
+    margin-bottom: 20px;
+    font-family:'Courier New', Courier, monospace; 
+}
+
 h3,
 h4 {
     text-align: center;
@@ -197,6 +229,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
