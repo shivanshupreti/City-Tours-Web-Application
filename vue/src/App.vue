@@ -9,6 +9,8 @@
       <span v-if="$store.state.token">|</span>
       <router-link v-bind:to="{ name: 'userItineraries' }" v-if="$store.state.token">My Itineraries</router-link>
       <span v-if="$store.state.token">|</span>
+      <router-link v-bind:to="{name: 'Admin'}" v-if="$store.state.token && $store.state.user.authorities[0].name === 'ROLE_ADMIN'">Admin Page</router-link>
+      <span v-if="$store.state.token && $store.state.user.authorities[0].name === 'ROLE_ADMIN'">|</span>
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token">Logout</router-link>
       <router-link v-bind:to="{ name: 'login' }" v-else>Login</router-link>
     </div>

@@ -12,6 +12,7 @@ import UserItinerariesView from '../views/UserItinerariesView.vue';
 import Route from '../views/Route.vue';
 import AddReviewView from '../views/AddReviewView.vue';
 import ReviewsView from '../views/ReviewsView.vue';
+import AdminPageView from '../views/AdminPageView.vue';
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -106,6 +107,12 @@ const routes = [
     meta: {
       requiresAuth: false
     }
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: AdminPageView,
+    
   }
 
 ];
