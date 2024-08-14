@@ -155,7 +155,7 @@ export default {
     border: 2px solid wheat;
     border-radius: 20px;
     width: 100%;
-    max-width: 250px;
+    max-width: 270px;
     height: auto;
     margin: 15px;
     display: flex;

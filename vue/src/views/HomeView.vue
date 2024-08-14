@@ -7,7 +7,7 @@
         <div class="header-content">
         <img src="images\city_tour.gif" alt="City Tours Icon" class="header-icon" />
         <div class="header-text">
-          <h1>City Tours</h1>
+          <h1>VeloCity</h1>
         </div>
       </div>
           <SearchBox v-model="searchCriteria" @search="performSearch" class="SearchBox"
