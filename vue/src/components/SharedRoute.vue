@@ -13,6 +13,7 @@
             </div>
         </div>
         <button @click="goBack">Back to Itineraries</button>
+        <button @click="addToUserItineraries">Add to My Itineraries</button>
     </div>
     <div v-else>
         <p>Loading...</p>
@@ -131,6 +132,20 @@ export default {
                 });
             });
         },
+        async addToUserItineraries() {
+            try {
+                // Clone the shared itinerary and modify as needed
+                const newItinerary = { ...this.itinerary };
+                delete newItinerary.id; // Remove the ID to create a new itinerary
+
+                // Add the itinerary to the user's list
+                await itineraryService.createItinerary(newItinerary);
+                alert("Itinerary added to your list successfully!");
+            } catch (error) {
+                console.error("Error adding itinerary to user's list:", error);
+                alert("There was an error adding the itinerary to your list. Please try again.");
+            }
+        }
     },
 };
 </script>
