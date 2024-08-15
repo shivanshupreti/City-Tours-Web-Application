@@ -11,10 +11,11 @@
             </div>
         </div>
     </div>
-
-    </div>
-        <button @click="shareUrl">Share Url</button>
-        <button @click="goBack">Back to Itineraries</button>
+</div>
+    <div class="button-container">
+        <button @click="goBack">Back</button>
+        <button @click="shareUrl">Share</button>    
+        </div>
     </div>
     <div v-else>
         <p>Loading...</p>
@@ -150,6 +151,28 @@ export default {
 </script>
 
 <style scoped>
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
+    margin-top: 20px;
+}
+
+button {
+    flex: 1;
+    padding: 10px 20px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1rem; 
+}
+
+button:hover {
+    background-color: #1976D2;
+}
 .timeline {
     position: relative;
     padding: 20px 0;
@@ -191,7 +214,7 @@ export default {
 }
 
 .route-view {
-    max-width: 700px;
+    max-width: 800px;
     margin: 50px auto;
     background: #ececec;
     padding: 30px;
@@ -227,21 +250,5 @@ li {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #2196f3;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-button:hover {
-    background-color: #1976D2;
 }
 </style>

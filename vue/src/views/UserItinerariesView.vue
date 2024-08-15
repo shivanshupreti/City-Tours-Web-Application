@@ -221,15 +221,19 @@ export default {
 .itinerary-list {
   max-width: 700px;
   margin: 50px auto;
-  background: #ececec;
+  background: whitesmoke;
   padding: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+  height: auto;
+  margin-top: 100px;
+  margin-bottom: 380px;
 }
 
 h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .itinerary-table {
@@ -240,16 +244,20 @@ h2 {
 
 .itinerary-table th,
 .itinerary-table td {
-  border: 1px solid #ddd;
+  border: 1px solid whitesmoke;
   padding: 8px;
   text-align: left;
   font-size: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold
+  
 }
 
 .itinerary-table th {
-  background-color: #f2f2f2;
+  background-color: wheat;
   text-align: center;
   font-weight: bold;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .itinerary-table td:last-child {
@@ -274,11 +282,11 @@ h2 {
 }
 
 .edit-btn {
-  background-color: #2196f3;
+  background-color: #ffa500;
 }
 
 .edit-btn:hover {
-  background-color: #1976D2;
+  background-color: #ff8c00;
 }
 
 .delete-btn {
@@ -401,10 +409,10 @@ button[type="submit"]:hover {
 }
 
 .view-btn {
-  background-color: #ffa500;
+  background-color: #2196f3;
 }
 
 .view-btn:hover {
-  background-color: #ff8c00;
+  background-color: #1976D2;
 }
 </style>

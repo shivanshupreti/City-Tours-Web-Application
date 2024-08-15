@@ -62,28 +62,80 @@
   </script>
   
   <style scoped>
-  .review-view {
-    margin: 7% auto;
-  }
+.review-view {
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 1200px;
+  background-color:whitesmoke;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-view h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.actions {
+  display: flex;
+  justify-content: center; 
+  margin-bottom: 2rem; 
+}
+
+.actions a {
+  margin: 0 1rem; 
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.actions a:hover {
+  text-decoration: underline;
+}
+
+.well-display {
+  display: flex;
+  align-items: center; /* Centers items vertically if needed */
+  gap: 0.2rem; /* Adjust space between items in the flex container */
+  margin-bottom: 2rem; /* Space below the container */
+  justify-content: center;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.star-summary {
+  display: flex;
+  align-items: center;
+}
+
+.average-summary {
+  margin-bottom: 1rem;
+}
+
+.review-list {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
   .well-display {
-    display: flex;
-    align-items: center; /* Centers items vertically if needed */
-    gap: .4%; /* Adjust space between items in the flex container */
-    margin-bottom: 1rem; /* Space below the container */
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
+
   .actions {
-    display: flex;
-    justify-content: center; /* Center the links horizontally */
-    margin-bottom: 2rem; /* Add space below the links */
+    flex-direction: column;
+    align-items: center;
   }
-  
+
   .actions a {
-    margin: 0 0.5rem; /* Space between the links */
+    margin: 0.5rem 0;
   }
-  
-  .description {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
+}
   </style>

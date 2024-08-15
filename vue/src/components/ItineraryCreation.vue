@@ -147,29 +147,44 @@ export default {
   margin: 50px auto;
   background: #ececec;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding-left: 50px;
   padding-right: 50px;
+  border-radius: 8px;
 }
 
 h2 {
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
+  border-radius: 8px; /* Rounded corners for input fields */
+  border: 1px solid #ccc;
   box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); /* Subtle shadow on focus */
+  outline: none;
 }
 
 .landmark-list {
@@ -188,10 +203,10 @@ h2 {
   color: white;
   border: none;
   cursor: pointer;
-  padding: 12px;
-  width: calc(33% - 10px);
+  padding: 12px 20px;
+  border-radius: 8px; /* Rounded corners for buttons */
   font-size: 1rem;
-  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .button-group .create-btn {

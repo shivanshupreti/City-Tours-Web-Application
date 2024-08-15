@@ -1,6 +1,6 @@
 <template>
     <div class="admin-page">
-      <h1>Admin Page</h1>
+      <!-- <h1>Admin Page</h1> -->
       <h2>Review Management</h2>
   
       <div class="review-filter">
@@ -145,6 +145,7 @@
   h2 {
     text-align: center;
     margin-bottom: 20px;
+    font-family: "Courier New", Courier, monospace;
   }
   
   .review-filter {

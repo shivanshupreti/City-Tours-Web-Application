@@ -245,7 +245,7 @@ export default {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
     align-items: center;
     justify-content: center;
-    margin-top: auto;
+    margin-top: 10px;
 }
 
 .popularity {
@@ -281,6 +281,7 @@ export default {
     justify-content: center;
     gap: 2px;
     margin-bottom: 10px;
+    margin-top: auto;
 }
 
 .star i {
