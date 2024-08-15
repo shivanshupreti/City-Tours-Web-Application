@@ -138,7 +138,8 @@ public class JdbcReviewDao implements ReviewDao {
     @Override
     public List<Review> getApprovedReviewsByLandmarkId(int landmarkId) {
         String sql = "SELECT id, landmark_id, user_id, first_name, last_name, title, rating, description, created_at, approval_status " +
-                "FROM reviews WHERE approval_status = TRUE AND landmark_id = ?";
+                "FROM reviews WHERE approval_status = TRUE AND landmark_id = ? " +
+                "ORDER BY created_at DESC";
         try {
             return jdbcTemplate.query(sql, new ReviewRowMapper(), landmarkId);
         } catch (CannotGetJdbcConnectionException e) {

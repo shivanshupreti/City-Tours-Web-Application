@@ -35,12 +35,12 @@
     border-radius: 6px;
     padding: 1rem;
     margin: 10px auto;
-    width: 60%;
-    text-align: center; /* Center text content */
+    width: 61%;
+    text-align: center; 
     display: flex;
-    flex-direction: column; /* Align items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
   }
   
   .review p {

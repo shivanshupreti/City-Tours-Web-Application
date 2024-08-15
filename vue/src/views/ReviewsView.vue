@@ -68,7 +68,7 @@
   .well-display {
     display: flex;
     align-items: center; /* Centers items vertically if needed */
-    gap: 0.1rem; /* Adjust space between items in the flex container */
+    gap: .4%; /* Adjust space between items in the flex container */
     margin-bottom: 1rem; /* Space below the container */
     justify-content: center;
   }

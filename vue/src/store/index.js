@@ -1,11 +1,12 @@
 import { createStore as _createStore } from 'vuex';
- import axios from 'axios';
+import axios from 'axios';
 
 export function createStore(currentToken, currentUser) {
-   let store = _createStore({
+  let store = _createStore({
     state: {
       token: currentToken || '',
-      user: currentUser || {}
+      user: currentUser || {},
+      notifications: []
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -23,9 +24,11 @@ export function createStore(currentToken, currentUser) {
         state.token = '';
         state.user = {};
         axios.defaults.headers.common = {};
+      },
+      SET_NOTIFICATION(state, message) {
+        state.notifications.push(message);
       }
     },
   });
   return store;
 }
-
