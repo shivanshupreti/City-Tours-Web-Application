@@ -61,6 +61,8 @@
   min-height: 100vh; 
   padding: 16px; 
   border-radius: 15px; 
+  max-width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   .loading {
     text-align: center;

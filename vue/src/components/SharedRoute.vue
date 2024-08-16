@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         goBack() {
-            this.$router.go(-1);
+            this.$router.push("/itineraries/yourItineraries");
         },
         getLandmarkName(placeId) {
             const landmark = this.itinerary.landmarkList.find(l => l.placeId === placeId);

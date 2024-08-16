@@ -28,7 +28,7 @@
     <div v-if="selectedItinerary" class="edit-form">
       <h3>Edit Itinerary</h3>
       <form @submit.prevent="submitForm">
-        <div>
+        <div class="form-group">
           <label for="name">Name:</label>
           <input type="text" v-model="selectedItinerary.name" required />
         </div>
@@ -51,11 +51,11 @@
             </option>
           </select>
         </div>
-        <div>
+        <div class="form-group">
           <label for="date">Date:</label>
           <input type="date" v-model="selectedItinerary.date" required />
         </div>
-        <div>
+        <div class="form-group">
           <label for="shared">Shared:</label>
           <select v-model="selectedItinerary.shared" required>
             <option :value="true">Yes</option>
@@ -163,6 +163,7 @@ export default {
           this.fetchItineraries();
           this.selectedItinerary = null;
           this.firstCityChange = true;
+          window.scrollTo(0, 0);
         })
         .catch((error) => {
           console.error("There was an error updating the itinerary:", error);
@@ -219,7 +220,7 @@ export default {
 
 <style scoped>
 .itinerary-list {
-  max-width: 700px;
+  max-width: 1000px;
   margin: 50px auto;
   background: whitesmoke;
   padding: 30px;
@@ -227,7 +228,7 @@ export default {
   border-radius: 8px;
   height: auto;
   margin-top: 100px;
-  margin-bottom: 380px;
+  margin-bottom: 100px;
 }
 
 h2 {
@@ -249,8 +250,8 @@ h2 {
   text-align: left;
   font-size: 1rem;
   font-family: 'Courier New', Courier, monospace;
-  font-weight: bold
-  
+  font-weight: bold;
+  min-width: 100px;
 }
 
 .itinerary-table th {
@@ -267,7 +268,7 @@ h2 {
 
 .action-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 5px;
 }
 
@@ -279,6 +280,7 @@ h2 {
   padding: 8px 12px;
   border-radius: 5px;
   margin-right: 5px;
+  min-width: 80px;
 }
 
 .edit-btn {
